@@ -7,7 +7,7 @@
  */
 ?>
     <div>
-        <span><a href='?controller=contactmgr&action=view'>Add</a></span>
+        <span><a href='?controller=contactmgr&action=edit'>Add</a></span>
         <span>Management Main Page </span>
     </div>
 </p>
@@ -20,7 +20,8 @@
     <div>
         <span><?php echo $contact->fname; ?></span>
         <span><?php echo $contact->lname; ?></span>
-        <span><a href='?controller=contactmgr&action=view&id=<?php echo $contact->id_contact; ?>'>Edit/View</a></span>
+        <span><?php echo $contact->email; ?></span>
+        <span><a href='?controller=contactmgr&action=edit&id=<?php echo $contact->id_contact; ?>'>Edit/View</a></span>
     </div>
 
 <?php } ?>
