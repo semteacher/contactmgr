@@ -21,7 +21,8 @@
         <span><?php echo $contact->fname; ?></span>
         <span><?php echo $contact->lname; ?></span>
         <span><?php echo $contact->email; ?></span>
-        <span><a href='?controller=contactmgr&action=edit&id=<?php echo $contact->id_contact; ?>'>Edit/View</a></span>
+        <span><a href='?controller=contactmgr&action=edit&id_contact=<?php echo $contact->id_contact; ?>'>Edit/View</a></span>
+        <span><a href='?controller=contactmgr&action=del&id_contact=<?php echo $contact->id_contact; ?>' onclick="return confirm('Are you sure you want to delete?')">Delete</a></span>
     </div>
 
 <?php } ?>
