@@ -35,6 +35,7 @@ CREATE TABLE IF NOT EXISTS `contacts` (
   `phone_h` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL,
   `phone_w` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL,
   `phone_c` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `phone_best` varchar(2) COLLATE utf8_unicode_ci DEFAULT NULL,
   `address1` varchar(1000) COLLATE utf8_unicode_ci DEFAULT NULL,
   `address2` varchar(1000) COLLATE utf8_unicode_ci DEFAULT NULL,
   `sity` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
