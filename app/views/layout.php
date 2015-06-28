@@ -13,11 +13,11 @@
   </head>
   <body>
     <header>
-      <a href='/'>Home</a>
+      <a href='/public/'>Home</a>
       <a href='?controller=contactmgr&action=index'>Contact Manager</a>
     </header>
 
-    <?php require_once('app'.DS.'routes.php'); ?>
+    <?php require_once('..'.DS .'app'.DS.'routes.php'); ?>
 
 <footer>
     Copyright
