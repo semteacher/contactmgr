@@ -28,4 +28,40 @@ class ContactsController extends Controller {
             echo "Application error:" . $e->getMessage();
         }
     }
+
+    public function edit($contactId)
+    {
+        try {
+
+            $this->_view->set('pageheader', 'Contact Details');
+            $this->_view->set('title', 'Contact Details Form');
+
+            $contact = $this->_model->getContactById((int)$contactId);
+
+            if ($contact)
+            {
+                $this->_view->set('contact', $contact);
+                $this->_view->set('mode', 'edit');
+            }
+            else
+            {
+                $this->_view->set('mode', 'add');
+            }
+
+            return $this->_view->output();
+
+        } catch (Exception $e) {
+            echo "Application error:" . $e->getMessage();
+        }
+    }
+
+    public function save()
+    {
+
+    }
+
+    public function del()
+    {
+
+    }
 }

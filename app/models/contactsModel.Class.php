@@ -25,4 +25,25 @@ class ContactsModel extends Model {
 
         return $contacts;
     }
+
+    public function getContactById($id)
+    {
+        $sql = "SELECT
+                    *
+                FROM
+                    contacts c
+                WHERE
+                    c.id_contact = ?";
+
+        $this->_setSql($sql);
+        $contactDetails = $this->getRow(array($id));
+
+        if (empty($contactDetails))
+        {
+            return false;
+        } else {
+            return $contactDetails;
+        }
+
+    }
 }
