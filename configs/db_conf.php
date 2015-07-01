@@ -10,4 +10,3 @@ define ('DB_NAME', 'contactmgr');
 define ('DB_CHARSET', 'UTF-8');
 define ('DB_USER', 'contactmgr_user');
 define ('DB_PASS', 'cont_pass');
-?>

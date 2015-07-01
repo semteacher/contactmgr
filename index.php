@@ -6,18 +6,21 @@
  * Time: 16:18
  */
 define ('DS', DIRECTORY_SEPARATOR);
-//define ('HOME', dirname(__FILE__));
+define ('HOME', dirname(__FILE__));
 
-require_once('configs' . DS . 'db_conf.php');
-require_once('utils' . DS . 'connection.php');
+ini_set('display_errors', 1);
 
-if (isset($_GET['controller']) && isset($_GET['action'])) {
-    $controller = $_GET['controller'];
-    $action = $_GET['action'];
-} else {
-    $controller = 'pages';
-    $action = 'home';
+require_once HOME . DS . 'configs' . DS . 'db_conf.php';
+require_once HOME . DS . 'utils' . DS . 'bootstrap.php';
+
+function __autoload($class)
+{
+   // var_dump($class);
+    if (file_exists(HOME . DS . 'utils' . DS . strtolower($class) . '.Class.php')) {
+        require_once HOME . DS . 'utils' . DS . strtolower($class) . '.Class.php';
+    } else if (file_exists(HOME . DS . 'app'. DS .'models' . DS . strtolower($class) . '.Class.php')) {
+        require_once HOME . DS . 'app'. DS .'models' . DS . strtolower($class) . '.Class.php';
+    } else if (file_exists(HOME . DS .'app'. DS . 'controllers' . DS . strtolower($class) . '.Class.php')) {
+        require_once HOME . DS . 'app'. DS . 'controllers' . DS . strtolower($class) . '.Class.php';
+    }
 }
-
-require_once('app' . DS . 'views' . DS . 'layout.php');
-?>
