@@ -26,7 +26,7 @@ class ContactsController extends Controller {
             return $this->_view->output();
 
         } catch (Exception $e) {
-            echo "Application error:" . $e->getMessage();
+            echo "Application error - cannot display Contacts list: " . $e->getMessage();
         }
     }
 
@@ -37,7 +37,7 @@ class ContactsController extends Controller {
             $this->_view->set('pageheader', 'Contact Details');
             $this->_view->set('title', 'Contact Details Form');
 
-            $contact = $this->_model->getContactById((int)$contactId);
+            $contact = $this->_model->getContactByIdAsArray((int)$contactId);
 
             if ($contact)
             {
@@ -52,7 +52,7 @@ class ContactsController extends Controller {
             return $this->_view->output();
 
         } catch (Exception $e) {
-            echo "Application error:" . $e->getMessage();
+            echo "Application error - cannot display Contact data: " . $e->getMessage();
         }
     }
 
@@ -60,9 +60,11 @@ class ContactsController extends Controller {
     {
         if (!isset($_POST['editcontactsubmit']))
         {
-            header('Location: /contact/index');
+            //header('Location: /contact/index');
+            $this->index();
         } elseif ($_POST['editcontactsubmit']=='cancel'){
-            header('Location: /contact/index');
+            //header('Location: /contact/index');
+            $this->index();
         }
         $errors = array();
         $check = true;
@@ -74,6 +76,18 @@ class ContactsController extends Controller {
         $phoneHome = isset($_POST['phone_h']) ? trim($_POST['phone_h']) : "0000";
 
         //form data validation
+        if (empty($firstName))
+        {
+            $check = false;
+            array_push($errors, "First Name is required!");
+        }
+
+        if (empty($lastName))
+        {
+            $check = false;
+            array_push($errors, "Last Name is required!");
+        }
+
         if (empty($email))
         {
             $check = false;
@@ -98,19 +112,21 @@ class ContactsController extends Controller {
             $this->_view->set('title', 'Contact Details Form - Error');
             $this->_view->set('pageheader', 'Contact Details - Invalid contact form data!');
             $this->_view->set('errors', $errors);
+            $this->_view->set('mode', $_POST['mode']);
             $this->_view->set('contact', $_POST);
             return $this->_view->output();
         }
 
         //store correct data
         try {
-            $contact = $_POST['mode'] == 'add' ? new ContactModel() : $this->_model->getContactById((int)$_POST['id_contact']);
+//var_dump($_POST);
+            $contact = $_POST['mode'] == 'add' ? new $this->_model : $this->_model->getContactById((int)$_POST['id_contact']);
             $contact->setFirstName($firstName);
             $contact->setLastName($lastName);
             $contact->setEmail($email);
             $contact->setPhoneHome($phoneHome);
-
-            $_POST['mode'] == 'add' ? $contact->add($contact) : $contact->update($contact);
+//var_dump($contact);
+            $_POST['mode'] == 'add' ? $contact->addContact() : $contact->updateContact();
 
 
             $this->_setView('index');
@@ -126,12 +142,14 @@ class ContactsController extends Controller {
 //
 //            $this->_view->set('userData', $data);
 
-            $this->_view->set('contact', $contact);
+            $contacts = $this->_model->getAllContacts();
+            $this->_view->set('contacts', $contacts);
 
         } catch (Exception $e) {
             $this->_setView('edit');
             $this->_view->set('title', 'Contact Details Form - Error');
             $this->_view->set('pageheader', 'Contact Details - There was an error saving the data!');
+            $this->_view->set('mode', $_POST['mode']);
             $this->_view->set('contact', $_POST);
             $this->_view->set('saveError', $e->getMessage());
         }
@@ -139,8 +157,23 @@ class ContactsController extends Controller {
         return $this->_view->output();
     }
 
-    public function del()
+    public function del($contactId)
     {
+        $this->_setView('index');
+        $this->_view->set('title', 'BundleJoy - Contact Manager');
 
+        try {
+            $this->_model->deleteContact((int)$contactId);
+
+            $this->_view->set('pageheader', 'Contact Management Main Page - delete success!');
+
+        } catch (Exception $e) {
+            $this->_view->set('pageheader', 'Contact Management Main Page - error deleting!');
+        }
+
+        $contacts = $this->_model->getAllContacts();
+        $this->_view->set('contacts', $contacts);
+
+        return $this->_view->output();
     }
 }

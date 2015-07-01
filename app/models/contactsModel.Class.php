@@ -95,7 +95,7 @@ class ContactsModel extends Model {
 
         $this->_setSql($sql);
         $contacts = $this->getAll();
-var_dump($contacts);
+//var_dump($contacts);
         if (empty($contacts))
         {
             return false;
@@ -108,15 +108,17 @@ var_dump($contacts);
                 $tmpcontact->setEmail($contact['email']);
                 array_push($contactlist, $tmpcontact);
             }
-            var_dump($contactlist);
+//var_dump($contactlist);
             return $contactlist;
         }
 
 
     }
 
-    public function getContactById($id)
+    public function getContactByIdAsArray($id_contact)
     {
+        $id_contact = intval($id_contact);
+
         $sql = "SELECT
                     *
                 FROM
@@ -125,7 +127,7 @@ var_dump($contacts);
                     c.id_contact = ?";
 
         $this->_setSql($sql);
-        $contactDetails = $this->getRow(array($id));
+        $contactDetails = $this->getRow(array($id_contact));
 
         if (empty($contactDetails))
         {
@@ -133,6 +135,82 @@ var_dump($contacts);
         } else {
             return $contactDetails;
         }
+
+    }
+
+    public function getContactById($id_contact)
+    {
+        $id_contact = intval($id_contact);
+
+        $sql = "SELECT
+                    *
+                FROM
+                    contacts c
+                WHERE
+                    c.id_contact = ?";
+
+        $this->_setSql($sql);
+        $contactDetails = $this->getRow(array($id_contact));
+
+        if (empty($contactDetails))
+        {
+            return false;
+        } else {
+            $tmpcontact = new ContactsModel;
+            $tmpcontact->setIdContact($contactDetails['id_contact']);
+            $tmpcontact->setFirstName($contactDetails['fname']);
+            $tmpcontact->setLastName($contactDetails['lname']);
+            $tmpcontact->setEmail($contactDetails['email']);
+            return $tmpcontact;
+        }
+
+    }
+
+    public function updateContact()
+    {
+        $sql = "UPDATE contacts c
+                SET
+                    c.fname=?, c.lname=?, c.email=?
+                WHERE
+                    c.id_contact = ?";
+
+        $contactData = array(
+            $this->_firstName,
+            $this->_lastName,
+            $this->_email,
+            $this->_idContact
+            //$this->_message
+        );
+
+        $sth = $this->_db->prepare($sql);
+        return $sth->execute($contactData);
+    }
+
+    public function addContact()
+    {
+        $sql = "INSERT INTO contacts
+                    (fname, lname, email)
+                VALUES
+                    (?, ?, ?)";
+
+        $contactData = array(
+            $this->_firstName,
+            $this->_lastName,
+            $this->_email
+            //$this->_message
+        );
+
+        $sth = $this->_db->prepare($sql);
+        return $sth->execute($contactData);
+    }
+
+    public function deleteContact($id_contact) {
+        // we make sure $id is an integer
+        $id_contact = intval($id_contact);
+
+        $sql = 'DELETE FROM contacts WHERE id_contact = '.$id_contact;
+
+        return $sth = $this->_db->exec($sql);
 
     }
 }
