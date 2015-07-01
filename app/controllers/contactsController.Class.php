@@ -72,10 +72,13 @@ class ContactsController extends Controller {
         //get POST data
         $firstName = isset($_POST['fname']) ? trim($_POST['fname']) : NULL;
         $lastName = isset($_POST['lname']) ? trim($_POST['lname']) : NULL;
-        $email = isset($_POST['email']) ? trim($_POST['email']) : "";
+        $email = isset($_POST['email']) ? trim($_POST['email']) : NULL;
         $phoneHome = isset($_POST['phone_h']) ? trim($_POST['phone_h']) : "0000";
 
         //form data validation
+        //TODO: create separate model method for the validation
+        // if $this->_model->validateContact(-params-) {
+        // $this->_model->setContact(-params-)} else { output form with data end error}
         if (empty($firstName))
         {
             $check = false;
@@ -120,14 +123,19 @@ class ContactsController extends Controller {
         //store correct data
         try {
 //var_dump($_POST);
+            //TODO: remove
             $contact = $_POST['mode'] == 'add' ? new $this->_model : $this->_model->getContactById((int)$_POST['id_contact']);
             $contact->setFirstName($firstName);
             $contact->setLastName($lastName);
             $contact->setEmail($email);
             $contact->setPhoneHome($phoneHome);
-//var_dump($contact);
-            $_POST['mode'] == 'add' ? $contact->addContact() : $contact->updateContact();
 
+//var_dump($contact);
+            //$_POST['mode'] == 'add' ? $contact->addContact() : $contact->updateContact();
+
+            $this->_model->setContact($_POST['id_contact'], $firstName, $lastName, $email, $phoneHome);
+//var_dump($this->_model);
+            $_POST['mode'] == 'add' ?  $this->_model->addContact() :  $this->_model->updateContact();
 
             $this->_setView('index');
             $this->_view->set('title', 'BundleJoy - Contact Manager');

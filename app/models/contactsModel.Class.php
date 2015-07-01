@@ -17,6 +17,15 @@ class ContactsModel extends Model {
 //    {
 //        parent::__construct();
 //    }
+
+    public function setContact($idContact=NULL, $firstName, $lastName, $email, $phoneHome=Null)
+    {
+        $this->_idContact = $idContact;
+        $this->_firstName = $firstName;
+        $this->_lastName = $lastName;
+        $this->_email = $email;
+        $this->_phoneHome = $phoneHome;
+    }
     /**
      * @param mixed $idContact
      */
@@ -86,7 +95,7 @@ class ContactsModel extends Model {
 
     public function getAllContacts()
     {
-        $contactlist = [];
+        $contactList = [];
 
         $sql = "SELECT
                     *
@@ -102,14 +111,15 @@ class ContactsModel extends Model {
         } else {
             foreach ($contacts as $contact) {
                 $tmpcontact = new ContactsModel;
-                $tmpcontact->setIdContact($contact['id_contact']);
-                $tmpcontact->setFirstName($contact['fname']);
-                $tmpcontact->setLastName($contact['lname']);
-                $tmpcontact->setEmail($contact['email']);
-                array_push($contactlist, $tmpcontact);
+                $tmpcontact->setContact($contact['id_contact'], $contact['fname'], $contact['lname'], $contact['email']);
+//                $tmpcontact->setIdContact($contact['id_contact']);
+//                $tmpcontact->setFirstName($contact['fname']);
+//                $tmpcontact->setLastName($contact['lname']);
+//                $tmpcontact->setEmail($contact['email']);
+                array_push($contactList, $tmpcontact);
             }
 //var_dump($contactlist);
-            return $contactlist;
+            return $contactList;
         }
 
 
@@ -156,12 +166,13 @@ class ContactsModel extends Model {
         {
             return false;
         } else {
-            $tmpcontact = new ContactsModel;
-            $tmpcontact->setIdContact($contactDetails['id_contact']);
-            $tmpcontact->setFirstName($contactDetails['fname']);
-            $tmpcontact->setLastName($contactDetails['lname']);
-            $tmpcontact->setEmail($contactDetails['email']);
-            return $tmpcontact;
+
+            $this->_firstName = $contactDetails['fname'];
+            $this->_lastName = $contactDetails['lname'];
+            $this->_email = $contactDetails['email'];
+            $this->_idContact = $contactDetails['id_contact'];
+
+            return $this;
         }
 
     }
