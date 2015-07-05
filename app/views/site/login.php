@@ -13,10 +13,10 @@
 <div>
     <span><h1><?php echo $pageheader; ?></h1></span>
 </div>
-
+<div class="errbox"><?php if(isset($loginerr)){echo $loginerr;} ?></div>
 <form action="/site/login" method="post" name="loginuser">
-    <div>Username: <input type="text" value="" name="username"></div>
-    <div>Password: <input type="password" value="" name="password"></div>
+    <div>Username: <input type="text" value="" name="username" required></div>
+    <div>Password: <input type="password" value="" name="password" required></div>
     <div>
         <input type="submit" name="loginusersubmit" value="login">
         <input class="button" type="button" onclick="window.location.replace('/site/index')" value="cancel" />

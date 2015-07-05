@@ -17,8 +17,10 @@ class SiteController extends Controller {
     {
         try {
 
+            $userName = isset($_SESSION['loggeduser']['userName']) ? ucwords($_SESSION['loggeduser']['userName']) : 'Guest';
+            
             $this->_view->set('admin', 'semteacher@gmail.com');
-            $this->_view->set('pageheader', 'Wellcome BundleJoy Inc. Site!');
+            $this->_view->set('pageheader', 'Wellcome BundleJoy Inc. Site, '.$userName.'!');
             $this->_view->set('title', 'BundleJoy Inc.');
 
             return $this->_view->output();
@@ -43,23 +45,17 @@ class SiteController extends Controller {
                     
                     $loggedUser = new UsersModel;
                     $login = $loggedUser->userLogin($userName, $password);
-                    //var_dump($login);
                     
                     if ($login) {
                         //login successfull
                         $_SESSION['loggeduser']['userName'] = $loggedUser->getUserName();
                         $_SESSION['loggeduser']['userRole'] = $loggedUser->getRole();
-                        //var_dump($_SESSION);
-                        //var_dump($_SESSION['loggeduser']['userName']);
                         header('Location: /site/index');
-                        //$this->index;
-                        
+                        //$this->index;                       
                     } else {
                         //login fail
-                        //$this->err403();
-                        header('Location: /site/err403');
-                    }
-                    
+                        $this->_view->set('loginerr', 'Unknown user/password combination!');
+                    }                   
                 }
             }
 
@@ -77,7 +73,24 @@ class SiteController extends Controller {
     public function logout()
     {
         unset($_SESSION['loggeduser']);
-        //$this->index();
-        header('Location: /site/index');
+        $this->_setView('index');
+        $this->index();
+        //header('Location: /site/index');
+    }
+    
+    public function err403($errmsg=NULL)
+    {
+        try {
+
+            $this->_view->set('admin', 'semteacher@gmail.com');
+            $this->_view->set('pageheader', 'BundleJoy Inc. - Forbidden!');
+            $this->_view->set('title', 'BundleJoy Inc. - 403 Error');
+            $this->_view->set('errmsg', $errmsg);
+
+            return $this->_view->output();
+
+        } catch (Exception $e) {
+            echo "Application error:" . $e->getMessage();
+        }
     }
 }

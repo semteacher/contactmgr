@@ -17,9 +17,9 @@
 <form action="/users/save" method="post" name="adduser">
     <input type="hidden" value="<?php echo $mode; ?>" name="mode">
     <input type="hidden" value="<?php if(isset($user)){echo $user['id_user'];} ?>" name="id_user">
-    <div>Username: <input type="text" value="<?php if(isset($user)){echo $user['username'];} ?>" name="username"></div>
-    <div>Password: <input type="password" value="" name="password"></div>
-    <div>Password (confirm): <input type="password" value="" name="confirmpassword"></div>
+    <div>Username: <input type="text" value="<?php if(isset($user)){echo $user['username'];} ?>" name="username" required></div>
+    <div>Password: <input type="password" value="" name="password" required></div>
+    <div>Password (confirm): <input type="password" value="" name="confirmpassword" required></div>
     <div>Role: <input type="text" value="<?php if(isset($user)){echo $user['role'];} ?>" name="role"></div>
     <div>
         <input type="submit" name="addusersubmit" value="save">
