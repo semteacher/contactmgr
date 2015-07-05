@@ -10,6 +10,7 @@
     <ul id="menu">
         <li><a href="/">Home</a></li>
         <li><a href="/contacts/index">Contact Manager</a></li>
+        <li><a href="/users/index">Users</a></li>
     </ul>
 </nav>
 <hr>
