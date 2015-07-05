@@ -116,13 +116,39 @@ class UsersModel extends Model {
             return false;
         } else {
 
-            $this->_firstName = $userDetails['id_user'];
+            $this->_idUser = $userDetails['id_user'];
             $this->_lastName = $userDetails['username'];
-            $this->_email = $userDetails['role'];
+            $this->_role = $userDetails['role'];
 
             return $this;
         }
 
+    }
+    
+    public function userLogin($userName, $password)
+    {
+        $sql = "SELECT
+                    id_user, username, role
+                FROM
+                    users u
+                WHERE
+                    (u.username = ?)AND(u.password = ?)";
+
+        $this->_setSql($sql);
+        $userDetails = $this->getRow(array($userName, md5($password)));
+
+        if (empty($userDetails))
+        {
+     //var_dump($userDetails);
+            return false;
+        } else {
+        //var_dump($userDetails);
+            $this->_idUser = $userDetails['id_user'];
+            $this->_userName = $userDetails['username'];
+            $this->_role = $userDetails['role'];
+
+            return $this;
+        }
     }
     
     public function addUser()

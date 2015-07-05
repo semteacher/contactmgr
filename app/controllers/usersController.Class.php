@@ -104,11 +104,11 @@ class UsersController extends Controller {
  
         if (!isset($_POST['editusersubmit'])||!isset($_POST['addusersubmit'])||!isset($_POST['changepassword']))
         {
-            //header('Location: /users/index');
-            $this->index();
+            header('Location: /users/index');
+            //$this->index();
         } elseif ($_POST['editusersubmit']=='cancel'||$_POST['addusersubmit']=='cancel'||$_POST['changepassword']=='cancel'){
-            //header('Location: /users/index');
-            $this->index();
+            header('Location: /users/index');
+            //$this->index();
         }
         $errors = array();
         $check = true;

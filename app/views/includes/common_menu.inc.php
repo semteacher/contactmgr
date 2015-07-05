@@ -13,4 +13,5 @@
         <li><a href="/users/index">Users</a></li>
     </ul>
 </nav>
+<?php include HOME . DS . 'app' . DS . 'views' . DS . 'includes' . DS . 'common_user.inc.php'; ?>
 <hr>

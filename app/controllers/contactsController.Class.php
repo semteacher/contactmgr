@@ -10,8 +10,17 @@ class ContactsController extends Controller {
 
     public function __construct($model, $action)
     {
-        parent::__construct($model, $action);
-        $this->_setModel($model);
+        if(isset($_SESSION['loggeduser']['userRole'])){
+            if($_SESSION['loggeduser']['userRole'] == 'admin'){
+                parent::__construct($model, $action);
+                $this->_setModel($model);
+            } else {
+                header('Location: /site/err403');
+            }
+        } else {
+            header('Location: /site/err403');
+            //Site::err403();
+        }    
     }
 
     public function index()
@@ -60,11 +69,11 @@ class ContactsController extends Controller {
     {
         if (!isset($_POST['editcontactsubmit']))
         {
-            //header('Location: /contact/index');
-            $this->index();
+            header('Location: /contact/index');
+            //$this->index();
         } elseif ($_POST['editcontactsubmit']=='cancel'){
-            //header('Location: /contact/index');
-            $this->index();
+            header('Location: /contact/index');
+            //$this->index();
         }
         $errors = array();
         $check = true;
