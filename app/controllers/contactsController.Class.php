@@ -10,17 +10,17 @@ class ContactsController extends Controller {
 
     public function __construct($model, $action)
     {
-        if(isset($_SESSION['loggeduser']['userRole'])){
-            if($_SESSION['loggeduser']['userRole'] == 'admin'){
+    //    if(isset($_SESSION['loggeduser']['userRole'])){
+    //        if($_SESSION['loggeduser']['userRole'] == 'admin'){
                 parent::__construct($model, $action);
                 $this->_setModel($model);
-            } else {
-                header('Location: /site/err403');
-            }
-        } else {
-            header('Location: /site/err403');
+    //        } else {
+    //            header('Location: /site/err403');
+    //        }
+    //    } else {
+    //        header('Location: /site/err403');
             //Site::err403();
-        }    
+    //    }    
     }
 
     public function index()

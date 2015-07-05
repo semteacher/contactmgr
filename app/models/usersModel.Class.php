@@ -17,7 +17,7 @@ class UsersModel extends Model {
 //        parent::__construct();
 //    }
 
-    public function setUser($idUser=NULL, $userName, $password=Null, $role=Null)
+    public function setUser($idUser=NULL, $userName, $password=Null, $role='user')
     {
         $this->_idUser = $idUser;
         $this->_userName = $userName;
