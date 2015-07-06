@@ -2,7 +2,7 @@
 
 <?php include HOME . DS . 'app' . DS . 'views' . DS . 'includes' . DS . 'common_menu.inc.php'; ?>
 
-    <div><h1><?php echo $pageheader; ?></h1></div>
+    <div><h2><?php echo $pageheader; ?></h2></div>
 
     <div>email to: <?php echo $admin; ?></div>
 

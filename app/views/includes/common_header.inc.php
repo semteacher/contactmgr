@@ -13,3 +13,4 @@
     <title><?php echo $title; ?></title>
 </head>
 <body>
+<div><h1><?php echo APP_NAME; ?></h1></div>

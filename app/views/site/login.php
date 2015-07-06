@@ -11,7 +11,7 @@
 <?php include HOME . DS . 'app' . DS . 'views' . DS . 'includes' . DS . 'common_menu.inc.php'; ?>
 
 <div>
-    <span><h1><?php echo $pageheader; ?></h1></span>
+    <span><h2><?php echo $pageheader; ?></h2></span>
 </div>
 <div class="errbox"><?php if(isset($loginerr)){echo $loginerr;} ?></div>
 <form action="/site/login" method="post" name="loginuser">

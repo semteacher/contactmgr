@@ -10,10 +10,8 @@
 
 <?php include HOME . DS . 'app' . DS . 'views' . DS . 'includes' . DS . 'common_menu.inc.php'; ?>
 
-    <div>
-        <span><a href="/contacts/edit">Add</a></span>
-        <span><h1><?php echo $pageheader; ?></h1></span>
-    </div>
+<div><span><a href="/contacts/edit">Add</a></span></div>
+<div><span><h2><?php echo $pageheader; ?></h2></span></div>
 </p>
 
 <div class="errbox">
@@ -56,6 +54,6 @@ else: ?>
 
 <?php endif; ?>
 
-</p>
+</p<div><span><a href="/contacts/edit">Add</a></span></div>
 
 <?php include HOME . DS . 'app' . DS . 'views' . DS . 'includes' . DS . 'common_footer.inc.php'; ?>

@@ -10,10 +10,9 @@
 
 <?php include HOME . DS . 'app' . DS . 'views' . DS . 'includes' . DS . 'common_menu.inc.php'; ?>
 
-    <div>
-        <span><a href="/users/add">Add User</a></span>
-        <span><h1><?php echo $pageheader; ?></h1></span>
-    </div>
+<div><span><a href="/users/add">Add User</a></span></div>
+<div><span><h2><?php echo $pageheader; ?></h2></span></div>
+
 </p>
     <div>
         <span>User ID</span><span>UserName</span><span>Role</span>
@@ -40,5 +39,6 @@ else: ?>
 <?php endif; ?>
 
 </p>
+<div><span><a href="/users/add">Add User</a></span></div>
 
 <?php include HOME . DS . 'app' . DS . 'views' . DS . 'includes' . DS . 'common_footer.inc.php'; ?>
