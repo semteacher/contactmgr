@@ -14,15 +14,25 @@
     <span><h1><?php echo $pageheader; ?></h1></span>
 </div>
 
+<div class="errbox">
+<?php
+    if(isset($errors)){
+        echo 'Error(s): ';
+        foreach ($errors as $error){echo '<span>'.$error.'</span>';
+    }} 
+?>
+</div>
+
 <form action="/contacts/save" method="post" name="editcontact">
     <input type="hidden" value="<?php echo $mode; ?>" name="mode">
-    <input type="hidden" value="<?php if(isset($contact)){echo $contact['id_contact'];} ?>" name="id_contact">
-    <div><input type="text" value="<?php if(isset($contact)){echo $contact['fname'];} ?>" name="fname"></div>
-    <div><input type="text" value="<?php if(isset($contact)){echo $contact['lname'];} ?>" name="lname"></div>
-    <div><input type="text" value="<?php if(isset($contact)){echo $contact['email'];} ?>" name="email"></div>
+    <input type="hidden" value="<?php if(isset($contact)){echo $contact['id_contact'];} ?>" name="contact[id_contact]">
+    <div>First Name: <input type="text" value="<?php if(isset($contact)){echo $contact['fname'];} ?>" name="contact[fname]"></div>
+    <div>Last Name: <input type="text" value="<?php if(isset($contact)){echo $contact['lname'];} ?>" name="contact[lname]"></div>
+    <div>Email: <input type="text" value="<?php if(isset($contact)){echo $contact['email'];} ?>" name="contact[email]"></div>
+    <div>Phone (home): <input type="text" value="<?php if(isset($contact)){echo $contact['phone_h'];} ?>" name="contact[phone_h]"></div>
     <div>
-        <input type="submit" name="command" value="save">
-        <input class="button" type="button" onclick="window.location.replace('/contacts/index')" value="Cancel" />
+        <input type="submit" name="editcontactsubmit" value="save">
+        <input class="button" type="button" onclick="window.location.replace('/contacts/index')" value="cancel" />
     </div>
 </form>
 

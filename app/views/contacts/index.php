@@ -15,6 +15,16 @@
         <span><h1><?php echo $pageheader; ?></h1></span>
     </div>
 </p>
+
+<div class="errbox">
+<?php
+    if(isset($errors)){
+        echo 'Error(s): ';
+        foreach ($errors as $error){echo '<span>'.$error.'</span>';
+    }} 
+?>
+</div>
+
     <div>
         <span>First</span><span>Last</span><span>E-mail</span><span>Best phone</span>
     </div>
@@ -22,11 +32,12 @@
 <?php if ($contacts): foreach ($contacts as $contact):  ?>
 
     <div>
-        <span><?php echo $contact['fname']; ?></span>
-        <span><?php echo $contact['lname']; ?></span>
-        <span><?php echo $contact['email']; ?></span>
-        <span><a href="/contacts/edit/<?php echo $contact['id_contact']; ?>">Edit/View</a></span>
-        <span><a href="/contacts/del/<?php echo $contact['id_contact']; ?>" onclick="return confirm('Are you sure you want to delete?')">Delete</a></span>
+        <span><?php echo $contact->getFirstName(); ?></span>
+        <span><?php echo $contact->getLastName(); ?></span>
+        <span><?php echo $contact->getEmail(); ?></span>
+        <span><?php echo $contact->getPhoneHome(); ?></span>
+        <span><a href="/contacts/edit/<?php echo $contact->getIdContact(); ?>">Edit/View</a></span>
+        <span><a href="/contacts/del/<?php echo $contact->getIdContact(); ?>" onclick="return confirm('Are you sure you want to delete?')">Delete</a></span>
     </div>
 
 <?php

@@ -12,6 +12,8 @@ class ContactsModel extends Model {
     private $_lastName;
     private $_email;
     private $_phoneHome;
+    
+    private $_errors;
 
 //    public function __construct()
 //    {
@@ -26,6 +28,67 @@ class ContactsModel extends Model {
         $this->_email = $email;
         $this->_phoneHome = $phoneHome;
     }
+    
+    public function setContactByArray($contactDeatils)
+    {
+        $this->_idContact = isset($contactDeatils['id_contact']) ? trim($contactDeatils['id_contact']) : NULL;
+        $this->_firstName = isset($contactDeatils['fname']) ? trim($contactDeatils['fname']) : NULL;
+        $this->_lastName = isset($contactDeatils['lname']) ? trim($contactDeatils['lname']) : NULL;
+        $this->_email = isset($contactDeatils['email']) ? trim($contactDeatils['email']) : NULL;
+        $this->_phoneHome = isset($contactDeatils['phone_h']) ? trim($contactDeatils['phone_h']) : NULL;
+    }
+    
+    public function validateContactByArray($contactDeatils)
+    {
+    }
+    
+    public function validateContact()
+    {
+        $errors = array();
+        $check = true;
+        
+        if (empty($this->_firstName))
+        {
+            $check = false;
+            array_push($errors, "First Name is required!");
+        }
+
+        if (empty($this->_lastName))
+        {
+            $check = false;
+            array_push($errors, "Last Name is required!");
+        }
+
+        if (empty($this->_email))
+        {
+            $check = false;
+            array_push($errors, "E-mail is required!");
+        }
+//        else if (!filter_var( $email, FILTER_VALIDATE_EMAIL ))
+//        {
+//            $check = false;
+//            array_push($errors, "Invalid E-mail!");
+//        }
+
+        if (empty($this->_phoneHome))
+        {
+            $check = false;
+            array_push($errors, "At least one phone is required!");
+        }
+        
+        if (!$check) {
+            $this->_errors = $errors;
+            return false;
+        } else {
+            return true;
+        }
+    }
+    
+    public function validationErrors() 
+    {
+        return $this->_errors;
+    }
+    
     /**
      * @param mixed $idContact
      */
@@ -111,11 +174,8 @@ class ContactsModel extends Model {
         } else {
             foreach ($contacts as $contact) {
                 $tmpcontact = new ContactsModel;
-                $tmpcontact->setContact($contact['id_contact'], $contact['fname'], $contact['lname'], $contact['email']);
-//                $tmpcontact->setIdContact($contact['id_contact']);
-//                $tmpcontact->setFirstName($contact['fname']);
-//                $tmpcontact->setLastName($contact['lname']);
-//                $tmpcontact->setEmail($contact['email']);
+                //$tmpcontact->setContact($contact['id_contact'], $contact['fname'], $contact['lname'], $contact['email']);
+                $tmpcontact->setContactByArray($contact);
                 array_push($contactList, $tmpcontact);
             }
 //var_dump($contactlist);
@@ -181,7 +241,7 @@ class ContactsModel extends Model {
     {
         $sql = "UPDATE contacts c
                 SET
-                    c.fname=?, c.lname=?, c.email=?
+                    c.fname=?, c.lname=?, c.email=?, c.phone_h=?
                 WHERE
                     c.id_contact = ?";
 
@@ -189,8 +249,8 @@ class ContactsModel extends Model {
             $this->_firstName,
             $this->_lastName,
             $this->_email,
+            $this->_phoneHome,
             $this->_idContact
-            //$this->_message
         );
 
         $sth = $this->_db->prepare($sql);
@@ -200,15 +260,15 @@ class ContactsModel extends Model {
     public function addContact()
     {
         $sql = "INSERT INTO contacts
-                    (fname, lname, email)
+                    (fname, lname, email, phone_h)
                 VALUES
-                    (?, ?, ?)";
+                    (?, ?, ?, ?)";
 
         $contactData = array(
             $this->_firstName,
             $this->_lastName,
-            $this->_email
-            //$this->_message
+            $this->_email,
+            $this->_phoneHome
         );
 
         $sth = $this->_db->prepare($sql);
