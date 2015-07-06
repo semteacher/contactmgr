@@ -35,9 +35,7 @@
         <span><?php echo $contact->getFirstName(); ?></span>
         <span><?php echo $contact->getLastName(); ?></span>
         <span><?php echo $contact->getEmail(); ?></span>
-        <span><?php echo $contact->getPhoneHome(); ?></span>
-        <span><?php echo $contact->getPhoneWork(); ?></span>
-        <span><?php echo $contact->getPhoneCell(); ?></span>
+        <span><?php echo $contact->getPhoneBestPhone(); ?></span>
         <span><?php echo $contact->getAddress1(); ?></span>
         <span><?php echo $contact->getAddress2(); ?></span>
         <span><?php echo $contact->getCity(); ?></span>

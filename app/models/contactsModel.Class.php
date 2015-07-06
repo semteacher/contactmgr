@@ -200,6 +200,20 @@ class ContactsModel extends Model {
     {
         return $this->_phoneBest;
     }
+    
+    /**
+     * @return mixed
+     */
+    public function getPhoneBestPhone()
+    {
+        if ($this->_phoneBest == 'h'){
+            return $this->_phoneHome;
+        } elseif ($this->_phoneBest == 'w'){
+            return $this->_phoneWork;
+        } else {
+            return $this->_phoneCell;
+        }
+    }
 
     /**
      * @return mixed
