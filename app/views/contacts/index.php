@@ -12,7 +12,6 @@
 
 <div><span><a href="/contacts/edit">Add</a></span></div>
 <div><span><h2><?php echo $pageheader; ?></h2></span></div>
-</p>
 
 <div class="errbox">
 <?php
@@ -23,9 +22,9 @@
 ?>
 </div>
 
-    <div>
-        <span>First</span><span>Last</span><span>E-mail</span><span>Best phone</span><span>Address 1</span><span>Address 2</span><span>City</span><span>State</span><span>Country</span><span>Zip</span><span>Birthday</span>
-    </div>
+<div>
+    <span>First</span><span>Last</span><span>E-mail</span><span>Best phone</span><span>Address 1</span><span>Address 2</span><span>City</span><span>State</span><span>Country</span><span>Zip</span><span>Birthday</span>
+</div>
 
 <?php if ($contacts): foreach ($contacts as $contact):  ?>
 
@@ -49,11 +48,11 @@
 endforeach;
 else: ?>
 
-<h1>Welcome!</h1>
+<div><span><h3>Welcome!</h3></span></div>
 <p>We currently do not have any contact.</p>
 
 <?php endif; ?>
 
-</p<div><span><a href="/contacts/edit">Add</a></span></div>
+<div><span><a href="/contacts/edit">Add</a></span></div>
 
 <?php include HOME . DS . 'app' . DS . 'views' . DS . 'includes' . DS . 'common_footer.inc.php'; ?>
