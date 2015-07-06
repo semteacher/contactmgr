@@ -80,10 +80,9 @@ class ContactsController extends Controller {
         $check = true;
         
         //$tmpcontact = new $this->_model;
-        $this->_model->setContactByArray($_POST['contact']);        
+        $this->_model->setContactByArray($_POST['contact']);
         
         $check = $this->_model->validateContact();
-
         //is it form data is valid?
         if (!$check)
         {
@@ -116,7 +115,7 @@ class ContactsController extends Controller {
             $this->_view->set('pageheader', 'Contact Details - There was an error saving the data!');
             $this->_view->set('mode', $_POST['mode']);
             $this->_view->set('contact', $_POST['contact']);
-            $this->_view->set('errors', $e->getMessage());
+            $this->_view->set('errors', array($e->getMessage()));
         }
 
         return $this->_view->output();
@@ -134,7 +133,7 @@ class ContactsController extends Controller {
 
         } catch (Exception $e) {
             $this->_view->set('pageheader', 'Contact Management Main Page - error deleting!');
-            $this->_view->set('errors', $e->getMessage());
+            $this->_view->set('errors', array($e->getMessage()));
         }
 
         $contacts = $this->_model->getAllContacts();
