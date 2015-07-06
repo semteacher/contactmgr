@@ -26,9 +26,9 @@
 <form action="/contacts/save" method="post" name="editcontact">
     <input type="hidden" value="<?php echo $mode; ?>" name="mode">
     <input type="hidden" value="<?php if(isset($contact)){echo $contact['id_contact'];} ?>" name="contact[id_contact]">
-    <div>First Name: <input type="text" value="<?php if(isset($contact)){echo $contact['fname'];} ?>" name="contact[fname]"></div>
-    <div>Last Name: <input type="text" value="<?php if(isset($contact)){echo $contact['lname'];} ?>" name="contact[lname]"></div>
-    <div>Email: <input type="text" value="<?php if(isset($contact)){echo $contact['email'];} ?>" name="contact[email]"></div>
+    <div>First Name: <input type="text" value="<?php if(isset($contact)){echo $contact['fname'];} ?>" name="contact[fname]" required></div>
+    <div>Last Name: <input type="text" value="<?php if(isset($contact)){echo $contact['lname'];} ?>" name="contact[lname]" required></div>
+    <div>Email: <input type="email" value="<?php if(isset($contact)){echo $contact['email'];} ?>" name="contact[email]" required placeholder="A Valid Email Address"></div>
     <div>Phone (home): <input type="text" value="<?php if(isset($contact)){echo $contact['phone_h'];} ?>" name="contact[phone_h]"></div>
     <div>
         <input type="submit" name="editcontactsubmit" value="save">
