@@ -5,8 +5,8 @@
  * Date: 28.06.2015
  * Time: 11:49
  */
-$controller = "site";
-$action = "index";
+$controller = 'site';
+$action = 'index';
 $query = null;
 
 if (isset($_GET['load']))
@@ -25,6 +25,27 @@ if (isset($_GET['load']))
     {
         $query = $params[2];
     }
+}
+
+//check role/set default if nope
+if(isset($_SESSION['loggeduser']['userRole'])){
+    $userRole = $_SESSION['loggeduser']['userRole'];
+} else {
+    $userRole = DEFAULT_SITE_ROLE;
+}
+
+//check permissions
+if (!isset($acl[$userRole][strtolower($controller)])){
+    //redirect to 403
+    $controller = 'site';
+    $action = 'err403';
+    $query = null;
+} elseif (!in_array($action, $acl[$userRole][strtolower($controller)])){
+//TODO:replace in_array!
+    //redirect to 403
+    $controller = 'site';
+    $action = 'err403';
+    $query = null;
 }
 
 $modelName = $controller;

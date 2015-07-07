@@ -12,6 +12,18 @@ class ContactsModel extends Model {
     private $_lastName;
     private $_email;
     private $_phoneHome;
+    private $_phoneWork;
+    private $_phoneCell;
+    private $_phoneBest;
+    private $_address1;
+    private $_address2;
+    private $_city;
+    private $_state;
+    private $_country;
+    private $_zip;
+    private $_birthday;
+    
+    private $_errors;
 
 //    public function __construct()
 //    {
@@ -26,6 +38,78 @@ class ContactsModel extends Model {
         $this->_email = $email;
         $this->_phoneHome = $phoneHome;
     }
+    
+    public function setContactByArray($contactDeatils)
+    {
+        $this->_idContact = isset($contactDeatils['id_contact']) ? trim($contactDeatils['id_contact']) : NULL;
+        $this->_firstName = isset($contactDeatils['fname']) ? trim($contactDeatils['fname']) : NULL;
+        $this->_lastName = isset($contactDeatils['lname']) ? trim($contactDeatils['lname']) : NULL;
+        $this->_email = isset($contactDeatils['email']) ? trim($contactDeatils['email']) : NULL;
+        $this->_phoneHome = isset($contactDeatils['phone_h']) ? trim($contactDeatils['phone_h']) : NULL;
+        $this->_phoneWork = isset($contactDeatils['phone_w']) ? trim($contactDeatils['phone_w']) : NULL;
+        $this->_phoneCell = isset($contactDeatils['phone_c']) ? trim($contactDeatils['phone_c']) : NULL;
+        $this->_phoneBest = isset($contactDeatils['phone_best']) ? trim($contactDeatils['phone_best']) : NULL;
+        $this->_address1 = isset($contactDeatils['address1']) ? trim($contactDeatils['address1']) : NULL;
+        $this->_address2 = isset($contactDeatils['address2']) ? trim($contactDeatils['address2']) : NULL;
+        $this->_city = isset($contactDeatils['city']) ? trim($contactDeatils['city']) : NULL;
+        $this->_state = isset($contactDeatils['state']) ? trim($contactDeatils['state']) : NULL;
+        $this->_country = isset($contactDeatils['country']) ? trim($contactDeatils['country']) : NULL;
+        $this->_zip = isset($contactDeatils['zip']) ? trim($contactDeatils['zip']) : NULL;
+        //Todo: convert to date;
+        $this->_birthday = isset($contactDeatils['birthday']) ? trim($contactDeatils['birthday']) : NULL;
+    }
+    
+    public function validateContactByArray($contactDeatils)
+    {
+    }
+    
+    public function validateContact()
+    {
+        $errors = array();
+        $check = true;
+        
+        if (empty($this->_firstName))
+        {
+            $check = false;
+            array_push($errors, "First Name is required!");
+        }
+
+        if (empty($this->_lastName))
+        {
+            $check = false;
+            array_push($errors, "Last Name is required!");
+        }
+
+        if (empty($this->_email))
+        {
+            $check = false;
+            array_push($errors, "E-mail is required!");
+        }
+//        else if (!filter_var( $email, FILTER_VALIDATE_EMAIL ))
+//        {
+//            $check = false;
+//            array_push($errors, "Invalid E-mail!");
+//        }
+
+        if (empty($this->_phoneHome)&&empty($this->_phoneWork)&&empty($this->_phoneCell))
+        {
+            $check = false;
+            array_push($errors, "At least one phone is required!");
+        }
+        
+        if (!$check) {
+            $this->_errors = $errors;
+            return false;
+        } else {
+            return true;
+        }
+    }
+    
+    public function validationErrors() 
+    {
+        return $this->_errors;
+    }
+    
     /**
      * @param mixed $idContact
      */
@@ -92,7 +176,101 @@ class ContactsModel extends Model {
     {
         return $this->_phoneHome;
     }
+    
+    /**
+     * @return mixed
+     */
+    public function getPhoneWork()
+    {
+        return $this->_phoneWork;
+    }
+    
+    /**
+     * @return mixed
+     */
+    public function getPhoneCell()
+    {
+        return $this->_phoneCell;
+    }
+    
+    /**
+     * @return mixed
+     */
+    public function getPhoneBest()
+    {
+        return $this->_phoneBest;
+    }
+    
+    /**
+     * @return mixed
+     */
+    public function getPhoneBestPhone()
+    {
+        if ($this->_phoneBest == 'h'){
+            return $this->_phoneHome;
+        } elseif ($this->_phoneBest == 'w'){
+            return $this->_phoneWork;
+        } else {
+            return $this->_phoneCell;
+        }
+    }
 
+    /**
+     * @return mixed
+     */
+    public function getAddress1()
+    {
+        return $this->_address1;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAddress2()
+    {
+        return $this->_address2;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCity()
+    {
+        return $this->_city;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getState()
+    {
+        return $this->_state;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCountry()
+    {
+        return $this->_country;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getZip()
+    {
+        return $this->_zip;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getBirthday()
+    {
+        return $this->_birthday;
+    }
+    
     public function getAllContacts()
     {
         $contactList = [];
@@ -111,11 +289,8 @@ class ContactsModel extends Model {
         } else {
             foreach ($contacts as $contact) {
                 $tmpcontact = new ContactsModel;
-                $tmpcontact->setContact($contact['id_contact'], $contact['fname'], $contact['lname'], $contact['email']);
-//                $tmpcontact->setIdContact($contact['id_contact']);
-//                $tmpcontact->setFirstName($contact['fname']);
-//                $tmpcontact->setLastName($contact['lname']);
-//                $tmpcontact->setEmail($contact['email']);
+                //$tmpcontact->setContact($contact['id_contact'], $contact['fname'], $contact['lname'], $contact['email']);
+                $tmpcontact->setContactByArray($contact);
                 array_push($contactList, $tmpcontact);
             }
 //var_dump($contactlist);
@@ -167,11 +342,12 @@ class ContactsModel extends Model {
             return false;
         } else {
 
-            $this->_firstName = $contactDetails['fname'];
-            $this->_lastName = $contactDetails['lname'];
-            $this->_email = $contactDetails['email'];
-            $this->_idContact = $contactDetails['id_contact'];
-
+            //$this->_firstName = $contactDetails['fname'];
+            //$this->_lastName = $contactDetails['lname'];
+            //$this->_email = $contactDetails['email'];
+            //$this->_idContact = $contactDetails['id_contact'];
+            $tmpcontact->setContactByArray($contact);
+            
             return $this;
         }
 
@@ -181,7 +357,7 @@ class ContactsModel extends Model {
     {
         $sql = "UPDATE contacts c
                 SET
-                    c.fname=?, c.lname=?, c.email=?
+                    c.fname=?, c.lname=?, c.email=?, c.phone_h=?, c.phone_w=?, c.phone_c=?, c.phone_best=?, c.address1=?, c.address2=?, c.city=?, c.state=?, c.country=?, c.zip=?, c.birthday=?
                 WHERE
                     c.id_contact = ?";
 
@@ -189,8 +365,18 @@ class ContactsModel extends Model {
             $this->_firstName,
             $this->_lastName,
             $this->_email,
+            $this->_phoneHome,
+            $this->_phoneWork,
+            $this->_phoneCell,
+            $this->_phoneBest,
+            $this->_address1,
+            $this->_address2,
+            $this->_city,
+            $this->_state,
+            $this->_country,
+            $this->_zip,
+            $this->_birthday,
             $this->_idContact
-            //$this->_message
         );
 
         $sth = $this->_db->prepare($sql);
@@ -200,15 +386,25 @@ class ContactsModel extends Model {
     public function addContact()
     {
         $sql = "INSERT INTO contacts
-                    (fname, lname, email)
+                    (fname, lname, email, phone_h, phone_w, phone_c, phone_best, address1, address2, city, state, country, zip, birthday)
                 VALUES
-                    (?, ?, ?)";
+                    (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         $contactData = array(
             $this->_firstName,
             $this->_lastName,
-            $this->_email
-            //$this->_message
+            $this->_email,
+            $this->_phoneHome,
+            $this->_phoneWork,
+            $this->_phoneCell,
+            $this->_phoneBest,
+            $this->_address1,
+            $this->_address2,
+            $this->_city,
+            $this->_state,
+            $this->_country,
+            $this->_zip,
+            $this->_birthday
         );
 
         $sth = $this->_db->prepare($sql);

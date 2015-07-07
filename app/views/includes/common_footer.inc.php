@@ -7,6 +7,9 @@
  */
 ?>
 <hr>
-<div>Copyright: BundleJoy Inc., 2015</div>
+</div>
+</div>
+<div id="footer">Copyright: BundleJoy Inc., 2015
+</div>
 </body>
 </html>

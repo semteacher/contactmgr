@@ -3,6 +3,8 @@
 <?php include HOME . DS . 'app' . DS . 'views' . DS . 'includes' . DS . 'common_menu.inc.php'; ?>
 
     <div><h2><?php echo $pageheader; ?></h2></div>
+    
+    <div>Error message: <?php echo $errmsg; ?></div>
 
     <div>email to: <?php echo $admin; ?></div>
 
