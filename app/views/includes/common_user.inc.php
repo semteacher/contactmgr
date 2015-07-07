@@ -6,7 +6,7 @@
  * Time: 10:46
  */
 ?>
-<span class="alignright">
+<span class="inline alignright">
 <nav>
     <ul id="usermenu">    
 <?php 
@@ -28,7 +28,6 @@ if(isset($_SESSION['loggeduser'])){
 <?php 
 } 
 ?>
-        
     </ul>
 </nav>    
 </span>

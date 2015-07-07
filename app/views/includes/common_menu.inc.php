@@ -7,8 +7,8 @@
  */
 ?>
 <div id="mainmenu">
-<span>
-<span>
+
+<span class="inline">
 <nav>
     <ul id="sitemenu">
         <li><a href="/">Home</a></li>
@@ -18,7 +18,7 @@
 </nav>
 </span>
 <?php include HOME . DS . 'app' . DS . 'views' . DS . 'includes' . DS . 'common_user.inc.php'; ?>
-</span>
+
 </div>
 <div id="content">
 <hr>
