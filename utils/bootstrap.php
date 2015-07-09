@@ -5,12 +5,13 @@
  * Date: 28.06.2015
  * Time: 11:49
  */
-$controller = 'site';
+$controller = 'Site';
 $action = 'index';
 $query = null;
 
 if (isset($_GET['load']))
 {
+    //var_dump($_GET);
     $params = array();
     $params = explode("/", $_GET['load']);
 

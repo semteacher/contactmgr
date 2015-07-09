@@ -11,7 +11,7 @@ $acl=[
     'admin'=>[
         'site'=>['index', 'login', 'logout', 'err403'],
         'contacts'=>['index', 'edit', 'save', 'del'],
-        'users'=>['index', 'edit', 'save', 'del', 'add']
+        'users'=>['index', 'edit', 'save', 'del', 'add', 'changepassword']
         ],
     'user'=>[
         'site'=>['index', 'login', 'logout', 'err403'],

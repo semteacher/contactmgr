@@ -107,7 +107,7 @@ class UsersController extends Controller {
             header('Location: /users/index');
             //$this->index();
         } elseif ($_POST['editusersubmit']=='cancel'||$_POST['addusersubmit']=='cancel'||$_POST['changepassword']=='cancel'){
-            header('Location: /users/index');
+            header('Location: '.SITE_ROOT.'/users/index');
             //$this->index();
         }
         $errors = array();

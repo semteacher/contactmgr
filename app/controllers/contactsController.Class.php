@@ -69,10 +69,10 @@ class ContactsController extends Controller {
     {
         if (!isset($_POST['editcontactsubmit']))
         {
-            header('Location: /contact/index');
+            header('Location: '.SITE_ROOT.'/contact/index');
             //$this->index();
         } elseif ($_POST['editcontactsubmit']=='cancel'){
-            header('Location: /contact/index');
+            header('Location: '.SITE_ROOT.'/contact/index');
             //$this->index();
         }
         

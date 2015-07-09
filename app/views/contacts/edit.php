@@ -23,7 +23,7 @@
 ?>
 </div>
 
-<form action="/contacts/save" method="post" name="editcontact">
+<form action="<?php echo SITE_ROOT; ?>/contacts/save" method="post" name="editcontact">
     <input type="hidden" value="<?php echo $mode; ?>" name="mode">
     <input type="hidden" value="<?php if(isset($contact)){echo $contact['id_contact'];} ?>" name="contact[id_contact]">
     <input type="hidden" value="<?php if(isset($contact)){echo $contact['phone_best'];} ?>" name="contact[phone_best]">
@@ -84,7 +84,7 @@
     </div>
     <div>
         <input type="submit" name="editcontactsubmit" value="save">
-        <input class="button" type="button" onclick="window.location.replace('/contacts/index')" value="cancel">
+        <input class="button" type="button" onclick="window.location.replace('<?php echo SITE_ROOT; ?>/contacts/index')" value="cancel">
     </div>
 </form>
 

@@ -10,7 +10,7 @@
 
 <?php include HOME . DS . 'app' . DS . 'views' . DS . 'includes' . DS . 'common_menu.inc.php'; ?>
 
-<div><span><a href="/contacts/edit">Add</a></span></div>
+<div><span><a href="<?php echo SITE_ROOT; ?>/contacts/edit">Add</a></span></div>
 <div><span><h2><?php echo $pageheader; ?></h2></span></div>
 
 <div class="errbox">
@@ -40,8 +40,8 @@
         <span><?php echo $contact->getCountry(); ?></span>
         <span><?php echo $contact->getZip(); ?></span>
         <span><?php echo $contact->getBirthday(); ?></span>
-        <span><a href="/contacts/edit/<?php echo $contact->getIdContact(); ?>">Edit/View</a></span>
-        <span><a href="/contacts/del/<?php echo $contact->getIdContact(); ?>" onclick="return confirm('Are you sure you want to delete?')">Delete</a></span>
+        <span><a href="<?php echo SITE_ROOT; ?>/contacts/edit/<?php echo $contact->getIdContact(); ?>">Edit/View</a></span>
+        <span><a href="<?php echo SITE_ROOT; ?>/contacts/del/<?php echo $contact->getIdContact(); ?>" onclick="return confirm('Are you sure you want to delete?')">Delete</a></span>
     </div>
 
 <?php
@@ -53,6 +53,6 @@ else: ?>
 
 <?php endif; ?>
 
-<div><span><a href="/contacts/edit">Add</a></span></div>
+<div><span><a href="<?php echo SITE_ROOT; ?>/contacts/edit">Add</a></span></div>
 
 <?php include HOME . DS . 'app' . DS . 'views' . DS . 'includes' . DS . 'common_footer.inc.php'; ?>
