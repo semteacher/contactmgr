@@ -20,11 +20,11 @@ if(isset($_SESSION['loggeduser'])){
     }    
 ?>
         </strong></span></li>
-        <li><span><a href="/site/logout">Logout</a></span></li>
+        <li><span><a href="<?php echo SITE_ROOT; ?>/site/logout">Logout</a></span></li>
 <?php    
 } else {
 ?>
-        <li><span><a href="/site/login">Login</a></span></li>
+        <li><span><a href="<?php echo SITE_ROOT; ?>/site/login">Login</a></span></li>
 <?php 
 } 
 ?>

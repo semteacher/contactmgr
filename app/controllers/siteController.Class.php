@@ -50,7 +50,7 @@ class SiteController extends Controller {
                         //login successfull
                         $_SESSION['loggeduser']['userName'] = $loggedUser->getUserName();
                         $_SESSION['loggeduser']['userRole'] = $loggedUser->getRole();
-                        header('Location: /site/index');
+                        header('Location: '.SITE_ROOT.'/site/index');
                         //$this->index;                       
                     } else {
                         //login fail

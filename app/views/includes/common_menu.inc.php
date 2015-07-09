@@ -11,9 +11,9 @@
 <span class="inline">
 <nav>
     <ul id="sitemenu">
-        <li><a href="/">Home</a></li>
-        <li><a href="/contacts/index">Contact Manager</a></li>
-        <li><a href="/users/index">Users</a></li>
+        <li><a href="<?php echo SITE_ROOT; ?>/">Home</a></li>
+        <li><a href="<?php echo SITE_ROOT; ?>/contacts/index">Contact Manager</a></li>
+        <li><a href="<?php echo SITE_ROOT; ?>/users/index">Users</a></li>
     </ul>
 </nav>
 </span>

@@ -10,7 +10,7 @@
 
 <?php include HOME . DS . 'app' . DS . 'views' . DS . 'includes' . DS . 'common_menu.inc.php'; ?>
 
-<div><span><a href="/users/add">Add User</a></span></div>
+<div><span><a href="<?php echo SITE_ROOT; ?>/users/add">Add User</a></span></div>
 <div><span><h2><?php echo $pageheader; ?></h2></span></div>
 
 </p>
@@ -24,9 +24,9 @@
         <span><?php echo $user->getIdUser(); ?></span>
         <span><?php echo $user->getUserName(); ?></span>
         <span><?php echo $user->getRole(); ?></span>
-        <span><a href="/users/edit/<?php echo $user->getIdUser(); ?>">Edit/View</a></span>
-        <span><a href="/users/changepassword/<?php echo $user->getIdUser(); ?>">Change Password</a></span>
-        <span><a href="/users/del/<?php echo $user->getIdUser(); ?>" onclick="return confirm('Are you sure you want to delete?')">Delete</a></span>
+        <span><a href="<?php echo SITE_ROOT; ?>/users/edit/<?php echo $user->getIdUser(); ?>">Edit/View</a></span>
+        <span><a href="<?php echo SITE_ROOT; ?>/users/changepassword/<?php echo $user->getIdUser(); ?>">Change Password</a></span>
+        <span><a href="<?php echo SITE_ROOT; ?>/users/del/<?php echo $user->getIdUser(); ?>" onclick="return confirm('Are you sure you want to delete?')">Delete</a></span>
     </div>
 
 <?php
@@ -39,6 +39,6 @@ else: ?>
 <?php endif; ?>
 
 </p>
-<div><span><a href="/users/add">Add User</a></span></div>
+<div><span><a href="<?php echo SITE_ROOT; ?>/users/add">Add User</a></span></div>
 
 <?php include HOME . DS . 'app' . DS . 'views' . DS . 'includes' . DS . 'common_footer.inc.php'; ?>

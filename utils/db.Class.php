@@ -27,6 +27,7 @@ class Db
                 self::$instance = new PDO($dsn, DB_USER, DB_PASS);
                 self::$instance->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                 self::$instance->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
+                self::$instance->exec("set names utf8");//fix PHP less then 5.3.6
             } catch (PDOException $e) {
                 die('Connection error: ' . $e->getMessage());
             }
