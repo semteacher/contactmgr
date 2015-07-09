@@ -101,12 +101,12 @@ class UsersController extends Controller {
     
     public function save()
     {
- 
-        if (!isset($_POST['editusersubmit'])||!isset($_POST['addusersubmit'])||!isset($_POST['changepassword']))
+       // var_dump($_POST);
+        if (!isset($_POST['editusersubmit'])||!isset($_POST['addusersubmit'])||!isset($_POST['changepasswordsubmit']))
         {
-            header('Location: /users/index');
+            header('Location: '.SITE_ROOT.'/users/index');
             //$this->index();
-        } elseif ($_POST['editusersubmit']=='cancel'||$_POST['addusersubmit']=='cancel'||$_POST['changepassword']=='cancel'){
+        } elseif ($_POST['editusersubmit']=='cancel'||$_POST['addusersubmit']=='cancel'||$_POST['changepasswordsubmit']=='cancel'){
             header('Location: '.SITE_ROOT.'/users/index');
             //$this->index();
         }
@@ -142,7 +142,7 @@ class UsersController extends Controller {
         }
         
         //TODO:check is null!
-        if (!empty($password)&&(isset($_POST['editusersubmit'])||isset($_POST['changepassword']))){
+        if (!empty($password)&&(isset($_POST['editusersubmit'])||isset($_POST['changepasswordsubmit']))){
             //TODO: password validation rules
             if ($password !=$confirmpassword) {
                 $check = false;

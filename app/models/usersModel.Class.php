@@ -139,7 +139,7 @@ class UsersModel extends Model {
 
         if (empty($userDetails))
         {
-     //var_dump($userDetails);
+    //var_dump($userDetails);
             return false;
         } else {
         //var_dump($userDetails);
@@ -162,6 +162,25 @@ class UsersModel extends Model {
             $this->_userName,
             $this->_password,
             $this->_role
+        );
+
+        $sth = $this->_db->prepare($sql);
+        return $sth->execute($userData);
+    }
+
+    public function UpdateUser()
+    {
+        $sql = "UPDATE users u
+                SET
+                    u.username=?, u.password=?, u.role=?
+                WHERE
+                    u.id_user = ?";
+
+        $userData = array(
+            $this->_userName,
+            $this->_password,
+            $this->_role,
+            $this->_idUser
         );
 
         $sth = $this->_db->prepare($sql);
