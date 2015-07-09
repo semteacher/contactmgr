@@ -9,7 +9,17 @@
 <?php include HOME . DS . 'app' . DS . 'views' . DS . 'includes' . DS . 'common_header.inc.php'; ?>
 
 <?php include HOME . DS . 'app' . DS . 'views' . DS . 'includes' . DS . 'common_menu.inc.php'; ?>
+    <script type="text/javascript">
+        function phoneCheck(thisName, thisValue) {
+            if (!document.getElementById("saved_phone_best").value){
+                if (thisValue != ''){
+                    document.getElementById(thisName).checked = true;
+                    document.getElementById("saved_phone_best").value = document.getElementById(thisName).value;
+                }
+            }
 
+        }
+    </script>
 <div>
     <span><h2><?php echo $pageheader; ?></h2></span>
 </div>
@@ -26,7 +36,7 @@
 <form action="<?php echo SITE_ROOT; ?>/contacts/save" method="post" name="editcontact">
     <input type="hidden" value="<?php echo $mode; ?>" name="mode">
     <input type="hidden" value="<?php if(isset($contact)){echo $contact['id_contact'];} ?>" name="contact[id_contact]">
-    <input type="hidden" value="<?php if(isset($contact)){echo $contact['phone_best'];} ?>" name="contact[phone_best]">
+    <input type="hidden" id="saved_phone_best" value="<?php if(isset($contact)){echo $contact['phone_best'];} ?>" name="saved_phone_best">
     <div>
         <label for="contact[fname]">First Name: </label>
         <input type="text" value="<?php if(isset($contact)){echo $contact['fname'];} ?>" name="contact[fname]" autofocus required>
@@ -41,18 +51,18 @@
     </div>
     <div>
         <label for="contact[phone_h]">Phone (home): </label>
-        <input type="radio" value="h" <?php if(isset($contact)){if ($contact['phone_best']=='h'){echo ' checked ';}} ?> name="contact[phone_best]">
-        <input type="text" value="<?php if(isset($contact)){echo $contact['phone_h'];} ?>" name="contact[phone_h]">
+        <input type="radio" id="contact[phone_h]" value="h" <?php if(isset($contact)){if ($contact['phone_best']=='h'){echo ' checked ';}} ?> name="contact[phone_best]">
+        <input type="text" value="<?php if(isset($contact)){echo $contact['phone_h'];} ?>" name="contact[phone_h]" onKeyUp="phoneCheck(this.name, this.value);" >
     </div>
     <div>
         <label for="contact[phone_w]">Phone (work): </label>
-        <input type="radio" value="w" <?php if(isset($contact)){if ($contact['phone_best']=='w'){echo ' checked ';}} ?> name="contact[phone_best]">
-        <input type="text" value="<?php if(isset($contact)){echo $contact['phone_w'];} ?>" name="contact[phone_w]">
+        <input type="radio" id="contact[phone_w]" value="w" <?php if(isset($contact)){if ($contact['phone_best']=='w'){echo ' checked ';}} ?> name="contact[phone_best]">
+        <input type="text" value="<?php if(isset($contact)){echo $contact['phone_w'];} ?>" name="contact[phone_w]" onKeyUp="phoneCheck(this.name, this.value);">
     </div>
     <div>
         <label for="contact[phone_c]">Phone (cell): </label>
-        <input type="radio" value="c" <?php if(isset($contact)){if ($contact['phone_best']=='c'){echo ' checked ';}} ?> name="contact[phone_best]">
-        <input type="text" value="<?php if(isset($contact)){echo $contact['phone_c'];} ?>" name="contact[phone_c]">
+        <input type="radio" id="contact[phone_c]" value="c" <?php if(isset($contact)){if ($contact['phone_best']=='c'){echo ' checked ';}} ?> name="contact[phone_best]">
+        <input type="text" value="<?php if(isset($contact)){echo $contact['phone_c'];} ?>" name="contact[phone_c]" onKeyUp="phoneCheck(this.name, this.value);">
     </div>
     <div>
         <label for="contact[address1]">Address 1: </label>
