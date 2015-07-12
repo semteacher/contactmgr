@@ -271,7 +271,7 @@ class ContactsModel extends Model {
         return $this->_birthday;
     }
     
-    public function getAllContacts()
+    public function getAllContacts($sortoptions)
     {
         $contactList = [];
 
@@ -279,6 +279,10 @@ class ContactsModel extends Model {
                     *
                 FROM
                     contacts c";
+        if ($sortoptions) {
+            $sql = $sql . " ORDER BY c." . $sortoptions[0] . " " . $sortoptions[1];
+        }
+        $sql = $sql . ";";
 
         $this->_setSql($sql);
         $contacts = $this->getAll();
@@ -296,7 +300,6 @@ class ContactsModel extends Model {
 //var_dump($contactlist);
             return $contactList;
         }
-
 
     }
 

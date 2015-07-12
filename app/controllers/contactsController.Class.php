@@ -26,9 +26,25 @@ class ContactsController extends Controller {
     public function index()
     {
         try {
-
-            $contacts = $this->_model->getAllContacts();
-            $this->_view->set('contacts', $contacts);
+            //TODO - create APP class and implement request method (like in YII)?
+            $queryparams = array();
+            if (isset($_GET['sort'])) {
+                $params = array();
+                $params = explode(".", $_GET['sort']);
+    
+                //set sort option
+                $queryparams[0] = $params[0];
+    
+                if (isset($params[1]) && !empty($params[1])) {
+                    //set sort optional param
+                    $queryparams[1] = $params[1];
+                }
+                
+                $this->_view->set('queryparams', $queryparams);
+            }
+            
+            $contacts = $this->_model->getAllContacts($queryparams);
+            $this->_view->set('contacts', $contacts);            
             $this->_view->set('title', 'BundleJoy - Contact Manager');
             $this->_view->set('pageheader', 'Contact Management Main Page');
 
