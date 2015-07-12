@@ -21,9 +21,11 @@
     }} 
 ?>
 </div>
-
 <div>
-    <span>First</span><span>Last</span><span>E-mail</span><span>Best phone</span><span>Address 1</span><span>Address 2</span><span>City</span><span>State</span><span>Country</span><span>Zip</span><span>Birthday</span>
+    <span><a href="<?php echo SITE_ROOT; ?>/contacts/index&sort=fname<?php if (isset($queryparams)&&$queryparams[0]=='fname'&&!isset($queryparams[1])){echo '.desc" class="asc';} elseif (isset($queryparams)&&$queryparams[0]=='fname'&&isset($queryparams[1])) {echo '" class="desc';} ?>">First Name</a></span>
+    <span><a href="<?php echo SITE_ROOT; ?>/contacts/index&sort=lname<?php if (isset($queryparams)&&$queryparams[0]=='lname'&&!isset($queryparams[1])){echo '.desc" class="asc';} elseif (isset($queryparams)&&$queryparams[0]=='lname'&&isset($queryparams[1])) {echo '" class="desc';} ?>">Last Name</a></span>
+    <span><a href="<?php echo SITE_ROOT; ?>/contacts/index&sort=email<?php if (isset($queryparams)&&$queryparams[0]=='email'&&!isset($queryparams[1])){echo '.desc" class="asc';} elseif (isset($queryparams)&&$queryparams[0]=='email'&&isset($queryparams[1])) {echo '" class="desc';} ?>">E-mail</a></span>
+    <span>Best phone</span><span>Address 1</span><span>Address 2</span><span>City</span><span>State</span><span>Country</span><span>Zip</span><span>Birthday</span>
 </div>
 
 <?php if ($contacts): foreach ($contacts as $contact):  ?>
