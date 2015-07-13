@@ -10,9 +10,11 @@
 
 <?php include HOME . DS . 'app' . DS . 'views' . DS . 'includes' . DS . 'common_menu.inc.php'; ?>
 
-<div><span><a href="<?php echo SITE_ROOT; ?>/contacts/edit">Add</a></span></div>
-<div><span><h2><?php echo $pageheader; ?></h2></span></div>
-
+<section id="content">
+<div>
+<div class="inline"><span><a class="button" href="<?php echo SITE_ROOT; ?>/contacts/edit">Add</a></span></div>
+<div class="inline"><span><h2><?php echo $pageheader; ?></h2></span></div>
+</div>
 <div class="errbox">
 <?php
     if(isset($errors)){
@@ -21,40 +23,56 @@
     }} 
 ?>
 </div>
-<div>
-    <span><a href="<?php echo SITE_ROOT; ?>/contacts/index&sort=fname<?php if (isset($queryparams)&&$queryparams[0]=='fname'&&!isset($queryparams[1])){echo '.desc" class="asc';} elseif (isset($queryparams)&&$queryparams[0]=='fname'&&isset($queryparams[1])) {echo '" class="desc';} ?>">First Name</a></span>
-    <span><a href="<?php echo SITE_ROOT; ?>/contacts/index&sort=lname<?php if (isset($queryparams)&&$queryparams[0]=='lname'&&!isset($queryparams[1])){echo '.desc" class="asc';} elseif (isset($queryparams)&&$queryparams[0]=='lname'&&isset($queryparams[1])) {echo '" class="desc';} ?>">Last Name</a></span>
-    <span><a href="<?php echo SITE_ROOT; ?>/contacts/index&sort=email<?php if (isset($queryparams)&&$queryparams[0]=='email'&&!isset($queryparams[1])){echo '.desc" class="asc';} elseif (isset($queryparams)&&$queryparams[0]=='email'&&isset($queryparams[1])) {echo '" class="desc';} ?>">E-mail</a></span>
-    <span>Best phone</span><span>Address 1</span><span>Address 2</span><span>City</span><span>State</span><span>Country</span><span>Zip</span><span>Birthday</span>
-</div>
 
-<?php if ($contacts): foreach ($contacts as $contact):  ?>
+<?php if ($contacts): ?>
 
-    <div>
-        <span><?php echo $contact->getFirstName(); ?></span>
-        <span><?php echo $contact->getLastName(); ?></span>
-        <span><?php echo $contact->getEmail(); ?></span>
-        <span><?php echo $contact->getPhoneBestPhone(); ?></span>
-        <span><?php echo $contact->getAddress1(); ?></span>
-        <span><?php echo $contact->getAddress2(); ?></span>
-        <span><?php echo $contact->getCity(); ?></span>
-        <span><?php echo $contact->getState(); ?></span>
-        <span><?php echo $contact->getCountry(); ?></span>
-        <span><?php echo $contact->getZip(); ?></span>
-        <span><?php echo $contact->getBirthday(); ?></span>
-        <span><a href="<?php echo SITE_ROOT; ?>/contacts/edit/<?php echo $contact->getIdContact(); ?>">Edit/View</a></span>
-        <span><a href="<?php echo SITE_ROOT; ?>/contacts/del/<?php echo $contact->getIdContact(); ?>" onclick="return confirm('Are you sure you want to delete?')">Delete</a></span>
-    </div>
+<table class="datagrid box-center">
+<tr>
+    <th><a href="<?php echo SITE_ROOT; ?>/contacts/index&sort=fname<?php if (isset($queryparams)&&$queryparams[0]=='fname'&&!isset($queryparams[1])){echo '.desc" class="asc';} elseif (isset($queryparams)&&$queryparams[0]=='fname'&&isset($queryparams[1])) {echo '" class="desc';} ?>">First Name</a></th>
+    <th><a href="<?php echo SITE_ROOT; ?>/contacts/index&sort=lname<?php if (isset($queryparams)&&$queryparams[0]=='lname'&&!isset($queryparams[1])){echo '.desc" class="asc';} elseif (isset($queryparams)&&$queryparams[0]=='lname'&&isset($queryparams[1])) {echo '" class="desc';} ?>">Last Name</a></th>
+    <th><a href="<?php echo SITE_ROOT; ?>/contacts/index&sort=email<?php if (isset($queryparams)&&$queryparams[0]=='email'&&!isset($queryparams[1])){echo '.desc" class="asc';} elseif (isset($queryparams)&&$queryparams[0]=='email'&&isset($queryparams[1])) {echo '" class="desc';} ?>">E-mail</a></th>
+    <th>Best phone</th>
+    <th>Address 1</th>
+    <th>Address 2</th>
+    <th>City</th>
+    <th>State</th>
+    <th>Country</th>
+    <th>Zip</th>
+    <th>Birthday</th>
+    <th></th>
+    <th></th>
+</tr>
 
-<?php
-endforeach;
-else: ?>
+<?php foreach ($contacts as $contact):  ?>
+
+    <tr>
+        <td><?php echo $contact->getFirstName(); ?></td>
+        <td><?php echo $contact->getLastName(); ?></td>
+        <td><?php echo $contact->getEmail(); ?></td>
+        <td><?php echo $contact->getPhoneBestPhone(); ?></td>
+        <td><?php echo $contact->getAddress1(); ?></td>
+        <td><?php echo $contact->getAddress2(); ?></td>
+        <td><?php echo $contact->getCity(); ?></td>
+        <td><?php echo $contact->getState(); ?></td>
+        <td><?php echo $contact->getCountry(); ?></td>
+        <td><?php echo $contact->getZip(); ?></td>
+        <td><?php echo $contact->getBirthday(); ?></td>
+        <td><a href="<?php echo SITE_ROOT; ?>/contacts/edit/<?php echo $contact->getIdContact(); ?>">Edit/View</a></td>
+        <td><a href="<?php echo SITE_ROOT; ?>/contacts/del/<?php echo $contact->getIdContact(); ?>" onclick="return confirm('Are you sure you want to delete?')">Delete</a></td>
+    </tr>
+
+<?php endforeach; ?>
+
+</table>
+
+<?php else: ?>
 
 <div><span><h3>Welcome!</h3></span></div>
 <p>We currently do not have any contact.</p>
 
 <?php endif; ?>
 
-<div><span><a href="<?php echo SITE_ROOT; ?>/contacts/edit">Add</a></span></div>
+<div><span><a class="button" href="<?php echo SITE_ROOT; ?>/contacts/edit">Add</a></span></div>
+</section>
 
 <?php include HOME . DS . 'app' . DS . 'views' . DS . 'includes' . DS . 'common_footer.inc.php'; ?>

@@ -10,6 +10,7 @@
 
 <?php include HOME . DS . 'app' . DS . 'views' . DS . 'includes' . DS . 'common_menu.inc.php'; ?>
 
+<section id="content">
 <div>
     <span><h2><?php echo $pageheader; ?></h2></span>
 </div>
@@ -29,5 +30,6 @@
         <input class="button" type="button" onclick="window.location.replace('<?php echo SITE_ROOT; ?>/users/index')" value="cancel" />
     </div>
 </form>
+</section>
 
 <?php include HOME . DS . 'app' . DS . 'views' . DS . 'includes' . DS . 'common_footer.inc.php'; ?>

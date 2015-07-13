@@ -6,10 +6,7 @@
  * Time: 18:25
  */
 ?>
-<hr>
-</div>
-</div>
-<div id="footer">Copyright: BundleJoy Inc., 2015
+<footer id="footer">Copyright: BundleJoy Inc., 2015</footer>
 </div>
 </body>
 </html>
