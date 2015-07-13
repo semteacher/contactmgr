@@ -9,7 +9,8 @@
 <?php include HOME . DS . 'app' . DS . 'views' . DS . 'includes' . DS . 'common_header.inc.php'; ?>
 
 <?php include HOME . DS . 'app' . DS . 'views' . DS . 'includes' . DS . 'common_menu.inc.php'; ?>
-    <script type="text/javascript">
+
+<script type="text/javascript">
         function phoneCheck(thisName, thisValue) {
             if (!document.getElementById("saved_phone_best").value){
                 if (thisValue != ''){
@@ -19,7 +20,9 @@
             }
 
         }
-    </script>
+</script>
+
+<section id="content">
 <div>
     <span><h2><?php echo $pageheader; ?></h2></span>
 </div>
@@ -93,9 +96,10 @@
         <input type="date" value="<?php if(isset($contact)){echo $contact['birthday'];} ?>" name="contact[birthday]">
     </div>
     <div>
-        <input type="submit" name="editcontactsubmit" value="save">
+        <input class="button" type="submit" name="editcontactsubmit" value="save">
         <input class="button" type="button" onclick="window.location.replace('<?php echo SITE_ROOT; ?>/contacts/index')" value="cancel">
     </div>
 </form>
+</section>
 
 <?php include HOME . DS . 'app' . DS . 'views' . DS . 'includes' . DS . 'common_footer.inc.php'; ?>

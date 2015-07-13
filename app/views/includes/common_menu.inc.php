@@ -18,7 +18,4 @@
 </nav>
 </span>
 <?php include HOME . DS . 'app' . DS . 'views' . DS . 'includes' . DS . 'common_user.inc.php'; ?>
-
 </div>
-<div id="content">
-<hr>

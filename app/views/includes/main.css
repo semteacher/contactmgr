@@ -1,10 +1,10 @@
 body
 {
-	width: 90%
-    margin: 0;
+	width: 95%;
+    margin: 0 auto;
 	padding: 0;
 	color: #555;
-	font: normal 10pt Arial,Helvetica,sans-serif;
+	font: normal 11pt Arial,Helvetica,sans-serif;
 	background: #EFEFEF;
 }
 
@@ -19,7 +19,7 @@ body
 #header
 {
 	margin: 0;
-	padding: 0;
+	padding: 0 20px;
 	border-top: 3px solid #C9E0ED;
 }
 
@@ -91,33 +91,63 @@ body
     float: left;
 }
 
+.box-center { 
+    margin: 0 auto; 
+}
+    
+.text-center { 
+    text-align: center; 
+}    
+
 .inline
 {
     display: inline-block;
 }
 
+.button{
+    padding:3px 6px 3px 6px;
+}
 
 /* add sorting icons to gridview sort links */
-a.asc:after, a.desc:after {
-    position: relative;
-    top: 1px;
-    display: inline-block;
-    //font-family: 'Glyphicons Halflings';
-    //font-style: normal;
-    //font-weight: normal;
-    line-height: 1;
-    padding-left: 5px;
+a.asc {
+    background: url(sort_up.gif) no-repeat scroll right center rgba(0, 0, 0, 0);
+    padding-right: 20px;
 }
 
-a.asc:after {
-    //content: "\e113" /*"\e151"*/;
-background:url(sort_down.gif) no-repeat scroll right center rgba(0, 0, 0, 0);
-    padding-right: 5px;
+a.desc {
+    background: url(sort_down.gif) no-repeat scroll right center rgba(0, 0, 0, 0);
+    padding-right: 20px;
 }
 
-a.desc:after {
-    content: /*"\e114"*/ "\e152";
+table.datagrid  {
+
 }
+
+table {
+    border-collapse: collapse; 
+    width: 100%;
+}
+
+th, td { border: none; }
+
+th{
+    background-color: orange; 
+    color: #fff;
+}
+
+tr:nth-of-type(even){
+    background-color: #F3F3F3;
+}
+tr:nth-of-type(odd) { 
+    background-color:#ddd;
+}
+
+
+
+
+
+
+
 
 div.flash-error, div.flash-notice, div.flash-success
 {
