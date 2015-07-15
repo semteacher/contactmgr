@@ -271,7 +271,7 @@ class ContactsModel extends Model {
         return $this->_birthday;
     }
     
-    public function getAllContacts($sortoptions)
+    public function getAllContacts($sortoptions=NULL)
     {
         $contactList = [];
 
