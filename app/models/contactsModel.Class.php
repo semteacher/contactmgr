@@ -280,7 +280,10 @@ class ContactsModel extends Model {
                 FROM
                     contacts c";
         if ($sortoptions) {
-            $sql = $sql . " ORDER BY c." . $sortoptions[0] . " " . $sortoptions[1];
+            $sql = $sql . " ORDER BY c." . $sortoptions[0];
+            if (isset($sortoptions[1])) {
+                $sql = $sql .  " " . $sortoptions[1];
+            }
         }
         $sql = $sql . ";";
 

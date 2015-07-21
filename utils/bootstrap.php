@@ -9,6 +9,7 @@ $controller = 'Site';
 $action = 'index';
 $query = null;
 
+
 if (isset($_GET['load']))
 {
     //var_dump($_GET);
@@ -38,13 +39,12 @@ if(isset($_SESSION['loggeduser']['userRole'])){
 //check permissions
 if (!isset($acl[$userRole][strtolower($controller)])){
     //redirect to 403
-    $controller = 'site';
+    $controller = 'Site';
     $action = 'err403';
     $query = null;
-} elseif (!in_array($action, $acl[$userRole][strtolower($controller)])){
-//TODO:replace in_array!
+} elseif (array_search($action, $acl[$userRole][strtolower($controller)]) === False){
     //redirect to 403
-    $controller = 'site';
+    $controller = 'Site';
     $action = 'err403';
     $query = null;
 }
