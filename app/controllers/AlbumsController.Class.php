@@ -21,8 +21,12 @@ class AlbumsController extends Controller
             //check fom submission
             if (isset($_POST['sharealbumsubmit'])) {
                 //TODO: 1. send email(s)
-                //TODO 2. Implement "Add to contacts" feature
-
+                //$this->sendemails($_POST['album']);
+                //Implement "Add to contacts" feature
+                $emailstoadd = $this->checkemails($_POST['album']['shareemails']);
+                if ($emailstoadd){
+                    $this->addtocontacts($emailstoadd);
+                }
                 //Back to list of albums
                 //$this->_setView('index');
                 //tmp - redirect to site home
@@ -66,14 +70,47 @@ class AlbumsController extends Controller
 
     public function selectcontacts()
     {
-        //we can use select from other page only!
-        if (!empty($_SERVER['HTTP_REFERER'])) {
-            $_SESSION['selectcontact']['ref_url'] = $_SERVER['HTTP_REFERER'];
+        try {
+            //we can use select from other page only!
+            if (!empty($_SERVER['HTTP_REFERER'])) {
+                $_SESSION['selectcontact']['ref_url'] = $_SERVER['HTTP_REFERER'];
 
-            $cont = new ContactsController('Contacts', 'select');
-            return $cont->select();
-        } else {
-            header('Location: ' . SITE_ROOT . '/site/err403');
+                $cont = new ContactsController('Contacts', 'select');
+                return $cont->select();
+            } else {
+                header('Location: ' . SITE_ROOT . '/site/err403');
+            }
+        } catch (Exception $e) {
+            echo "Application error:" . $e->getMessage();
         }
+    }
+
+    public function checkemails($emailsstr)
+    {
+        try {
+            $emails = explode(",", $emailsstr);
+            $emailstoadd = array();
+            foreach ($emails as $email) {
+                //check if contact exist
+                $contact = new ContactsModel();
+                if (!$contact->getContactByEmailAsArray($email)) {
+                    array_push($emailstoadd, $email);
+                }
+                if ($emailstoadd){
+                    return $this->addtocontacts($emailstoadd);
+                } else {
+                    return false;
+                }
+            }
+        } catch (Exception $e) {
+            echo "Application error:" . $e->getMessage();
+        }
+    }
+
+    public function addtocontacts($emailstoadd)
+    {
+        //TODO:check form POST - request adding procedure
+        //TODO:display form
+
     }
 }

@@ -347,14 +347,32 @@ class ContactsModel extends Model {
         {
             return false;
         } else {
-
-            //$this->_firstName = $contactDetails['fname'];
-            //$this->_lastName = $contactDetails['lname'];
-            //$this->_email = $contactDetails['email'];
-            //$this->_idContact = $contactDetails['id_contact'];
-            $tmpcontact->setContactByArray($contact);
+            $tmpcontact=$this->setContactByArray($contactDetails);
             
-            return $this;
+            return $tmpcontact;
+        }
+
+    }
+
+    public function getContactByEmailAsArray($email)
+    {
+        //$id_contact = intval($id_contact);
+
+        $sql = "SELECT
+                    *
+                FROM
+                    contacts c
+                WHERE
+                    c.email = ?";
+
+        $this->_setSql($sql);
+        $contactDetails = $this->getRow(array($email));
+
+        if (empty($contactDetails))
+        {
+            return false;
+        } else {
+            return $contactDetails;
         }
 
     }
