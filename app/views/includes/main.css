@@ -104,10 +104,38 @@ body
     display: inline-block;
 }
 
-.button{
-    padding:3px 6px 3px 6px;
+.button {
+    background: #3498db;
+    background-image: -webkit-linear-gradient(top, #3498db, #2980b9);
+    background-image: -moz-linear-gradient(top, #3498db, #2980b9);
+    background-image: -ms-linear-gradient(top, #3498db, #2980b9);
+    background-image: -o-linear-gradient(top, #3498db, #2980b9);
+    background-image: linear-gradient(to bottom, #3498db, #2980b9);
+    -webkit-border-radius: 3;
+    -moz-border-radius: 3;
+    border-radius: 3px;
+    font-family: Arial;
+    font-weight:bold;
+    color: #ffffff;
+    font-size: 15px;
+    padding: 3px 10px 3px 10px;
+    text-decoration: none;
 }
 
+.button:hover {
+    background: #3cb0fd;
+    background-image: -webkit-linear-gradient(top, #3cb0fd, #3498db);
+    background-image: -moz-linear-gradient(top, #3cb0fd, #3498db);
+    background-image: -ms-linear-gradient(top, #3cb0fd, #3498db);
+    background-image: -o-linear-gradient(top, #3cb0fd, #3498db);
+    background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
+    text-decoration: none;
+}
+
+.divpadd {
+    padding: 5px 0px 5px 0px;
+    display: block;
+}
 /* add sorting icons to gridview sort links */
 a.asc {
     background: url(sort_up.gif) no-repeat scroll right center rgba(0, 0, 0, 0);
@@ -128,7 +156,10 @@ table {
     width: 100%;
 }
 
-th, td { border: none; }
+th, td {
+    border: none;
+    padding: 3px 0px 3px 0px;
+}
 
 th{
     background-color: orange; 
@@ -142,6 +173,26 @@ tr:nth-of-type(odd) {
     background-color:#ddd;
 }
 
+form{
+    border-style: solid;
+    border-width: 1px;
+}
+
+label{
+    display: inline-block;
+    float: left;
+    clear: left;
+    width: 250px;
+    text-align: right;
+}
+input {
+    display: inline-block;
+}
+.labelbtn{
+    position: relative;
+    clear: left;
+    left: 186px;
+}
 
 
 

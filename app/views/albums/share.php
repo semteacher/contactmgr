@@ -15,13 +15,13 @@
             <div>
                 <label for="album[shareemails]">Share Album with (Enter emails): </label>
                 <input type="email" value="<?php if(isset($album['shareemails'])){echo $album['shareemails'];} ?>" name="album[shareemails]" required multiple placeholder="A Valid Email Address">
-                <a href="<?php echo SITE_ROOT; ?>/albums/selectcontacts">Use Contact Manager to select</a>
+                <a class="button" href="<?php echo SITE_ROOT; ?>/albums/selectcontacts">Use Contact Manager to select</a>
             </div>
             <div>
                 <label for="album[sharemessage]">Album Sharing Message: </label>
                 <textarea name="album[sharemessage]" cols="50" rows="5" required><?php if(isset($album['sharemessage'])){echo $album['sharemessage'];} ?></textarea>
             </div>
-            <div>
+            <div  class="labelbtn">
                 <input class="button" type="submit" name="sharealbumsubmit" value="save">
                 <input class="button" type="button" onclick="window.location.replace('<?php echo SITE_ROOT; ?>/site/index')" value="cancel">
             </div>
