@@ -22,11 +22,11 @@
     <input type="hidden" value="<?php if(isset($user)){echo $user['role'];} ?>" name="role">
     <div>Username: <?php if(isset($user)){echo $user['username'];} ?></div>
     <div>Role: <?php if(isset($user)){echo $user['role'];} ?></div>
-    <div>Password: <input type="password" value="" name="password" required></div>
-    <div>Password (confirm): <input type="password" value="" name="confirmpassword" required></div>
+    <div><label for="password">Password: </label><input type="password" value="" name="password" required></div>
+    <div><label for="confirmpassword">Password (confirm): </label><input type="password" value="" name="confirmpassword" required></div>
 
     <div>
-        <input type="submit" name="changepasswordsubmit" value="save">
+        <input class="button" type="submit" name="changepasswordsubmit" value="save">
         <input class="button" type="button" onclick="window.location.replace('<?php echo SITE_ROOT; ?>/users/index')" value="cancel" />
     </div>
 </form>
