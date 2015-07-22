@@ -88,7 +88,7 @@
         <label for="contact[birthday]">Birthday: </label>
         <input type="date" value="<?php if(isset($contact)){echo $contact['birthday'];} ?>" name="contact[birthday]">
     </div>
-    <div>
+    <div class="labelbtn">
         <input class="button" type="submit" name="editcontactsubmit" value="save">
         <input class="button" type="button" onclick="window.location.replace('<?php echo SITE_ROOT; ?>/contacts/index')" value="cancel">
     </div>

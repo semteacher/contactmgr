@@ -11,7 +11,7 @@
 <?php include HOME . DS . 'app' . DS . 'views' . DS . 'includes' . DS . 'common_menu.inc.php'; ?>
 
 <section id="content">
-<div><span><a href="<?php echo SITE_ROOT; ?>/users/add">Add User</a></span></div>
+<div><span><a class="button" href="<?php echo SITE_ROOT; ?>/users/add">Add User</a></span></div>
 <div><span><h2><?php echo $pageheader; ?></h2></span></div>
 
 </p>
@@ -39,7 +39,7 @@ else: ?>
 
 <?php endif; ?>
 
-<div><span><a href="<?php echo SITE_ROOT; ?>/users/add">Add User</a></span></div>
+<div><span><a class="button" href="<?php echo SITE_ROOT; ?>/users/add">Add User</a></span></div>
 </section>
 
 <?php include HOME . DS . 'app' . DS . 'views' . DS . 'includes' . DS . 'common_footer.inc.php'; ?>

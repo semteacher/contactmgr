@@ -67,9 +67,9 @@
                         <td><?php echo $contact->getCountry(); ?></td>
                         <td><?php echo $contact->getZip(); ?></td>
                         <td><?php echo $contact->getBirthday(); ?></td>
-                        <td><a href="<?php echo SITE_ROOT; ?>/contacts/edit/<?php echo $contact->getIdContact(); ?>">Edit/View</a>
+                        <td><a class="button" href="<?php echo SITE_ROOT; ?>/contacts/edit/<?php echo $contact->getIdContact(); ?>">Edit/View</a>
                         </td>
-                        <td><a href="<?php echo SITE_ROOT; ?>/contacts/del/<?php echo $contact->getIdContact(); ?>"
+                        <td><a class="button" href="<?php echo SITE_ROOT; ?>/contacts/del/<?php echo $contact->getIdContact(); ?>"
                                onclick="return confirm('Are you sure you want to delete?')">Delete</a></td>
                     </tr>
 
@@ -84,7 +84,7 @@
 
         <?php endif; ?>
 
-        <div><span><a class="button" href="<?php echo SITE_ROOT; ?>/contacts/edit">Add</a></span></div>
+        <div class="divpadd" ><span><a class="button" href="<?php echo SITE_ROOT; ?>/contacts/edit">Add</a></span></div>
     </section>
 
 <?php include HOME . DS . 'app' . DS . 'views' . DS . 'includes' . DS . 'common_footer.inc.php'; ?>
