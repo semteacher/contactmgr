@@ -27,14 +27,7 @@
     <span><h2><?php echo $pageheader; ?></h2></span>
 </div>
 
-<div class="errbox">
-<?php
-    if(isset($errors)){
-        echo 'Error(s): ';
-        foreach ($errors as $error){echo '<span>'.$error.'</span>';
-    }} 
-?>
-</div>
+<?php include HOME . DS . 'app' . DS . 'views' . DS . 'includes' . DS . 'common_errorbox.inc.php'; ?>
 
 <form action="<?php echo SITE_ROOT; ?>/contacts/save" method="post" name="editcontact">
     <input type="hidden" value="<?php echo $mode; ?>" name="mode">

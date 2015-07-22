@@ -25,7 +25,7 @@ require_once HOME . DS . 'utils' . DS . 'bootstrap.php';
 
 function __autoload($class)
 {
-   // var_dump($class);
+    //var_dump($class);
     if (file_exists(HOME . DS . 'utils' . DS . $class . '.Class.php')) {
         require_once HOME . DS . 'utils' . DS . $class . '.Class.php';
     } else if (file_exists(HOME . DS . 'app'. DS .'models' . DS . $class . '.Class.php')) {
