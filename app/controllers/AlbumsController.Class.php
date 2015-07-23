@@ -18,39 +18,33 @@ class AlbumsController extends Controller
     public function share($albumId)
     {
         try {
+            $userName = isset($_SESSION['loggeduser']['userName']) ? ucwords($_SESSION['loggeduser']['userName']) : 'Guest';
+            $errors = array();
+
+            //Get album data
+            $album = array();
+            $album = $this->_model->getAlbumByIdAsArray((int)$albumId);
+
+            if (!isset($album)) {
+                $album['albumtitle'] = '';
+                array_push($errors, "Album with ID=" . $albumId . " does not exist!");
+            }
+
             //check fom submission
             if (isset($_POST['sharealbumsubmit'])) {
                 //TODO: 1. send email(s)
                 //$this->sendemails($_POST['album']);
+                $emailsuccess = true; //tmp....
+                if (!$emailsuccess) {
+                    array_push($errors, "Emails sending failure!");
+                }
                 //Implement "Add to contacts" feature
-                $emailstoadd = $this->checkemails($_POST['album']['shareemails']);
-                if ($emailstoadd){
-                    $this->addtocontacts($emailstoadd);
-                }
-                //Back to list of albums
-                //$this->_setView('index');
-                //tmp - redirect to site home
-                $cont = new SiteController('Site', 'index');
-                return $cont->index();
+                $emailstoadd = array();
+                $emailstoadd = $this->_model->checkEmailsExist($_POST['album']['shareemails']);
+                //display "Add to contacts" form
+                return $this->sharereport($errors, $emailstoadd);
+
             } else {
-                $userName = isset($_SESSION['loggeduser']['userName']) ? ucwords($_SESSION['loggeduser']['userName']) : 'Guest';
-
-                $errors = array();
-                //$check = true;
-
-                //Get album data
-                //Uncomment for rel case
-                //$album = $this->_model->getAlbumById((int)$albumId);
-                //tmp - for demo only
-                $album = array();
-                $album['albumtitle'] = 'My Demo Album';
-                $album['albumId'] = $albumId;
-
-                if (!$album) {
-                    $album['albumtitle'] = '';
-                    array_push($errors, "Album with ID=" . $albumId . " does not exist!");
-                    $this->_view->set('errors', $errors);
-                }
 
                 if (isset($_POST['selectcontacts'])) {
                     $album['shareemails'] = implode(', ', $_POST['selctedcontacts']);
@@ -60,9 +54,13 @@ class AlbumsController extends Controller
                 $this->_view->set('pageheader', $userName . ': Albums Share (Demo) - ' . $album['albumtitle']);
                 $this->_view->set('title', 'BundleJoy Inc. - Albums Share.');
                 $this->_view->set('album', $album);
+                $this->_view->set('errors', $errors);
 
                 return $this->_view->output();
             }
+
+            //return $this->_view->output();
+
         } catch (Exception $e) {
             echo "Application error:" . $e->getMessage();
         }
@@ -85,32 +83,38 @@ class AlbumsController extends Controller
         }
     }
 
-    public function checkemails($emailsstr)
+
+    public function sharereport($errors = null, $emailstoadd = null)
     {
         try {
-            $emails = explode(",", $emailsstr);
-            $emailstoadd = array();
-            foreach ($emails as $email) {
-                //check if contact exist
-                $contact = new ContactsModel();
-                if (!$contact->getContactByEmailAsArray($email)) {
-                    array_push($emailstoadd, $email);
-                }
-                if ($emailstoadd){
-                    return $this->addtocontacts($emailstoadd);
-                } else {
-                    return false;
-                }
+            $userName = isset($_SESSION['loggeduser']['userName']) ? ucwords($_SESSION['loggeduser']['userName']) : 'Guest';
+
+            //check fom submission
+            if (isset($_POST['sharereportaddcontacts'])) {
+                //add emails to DB
+                //exclude it from list
             }
+            if (isset($_POST['sharereportgotoindex'])) {
+                //goto list of albums
+                //tmp - redirect to site home
+                $cont = new SiteController('Site', 'index');
+                return $cont->index();
+            }
+
+                if (!isset($errors)) {
+                    $this->_view->set('pageheader', $userName . ': Album - ' . $this->_model->getAlbumTitle() . ' - shared successfully!');
+                } else {
+                    $this->_view->set('pageheader', $userName . ': Albums - ' . $this->_model->getAlbumTitle() . ' - sharing error!');
+                }
+
+                $this->_view->set('title', 'BundleJoy Inc. - Albums Sharing Report Page.');
+                $this->_view->set('emailstoadd', $emailstoadd);
+                $this->_view->set('errors', $errors);
+
+                return $this->_view->output();
+
         } catch (Exception $e) {
             echo "Application error:" . $e->getMessage();
         }
-    }
-
-    public function addtocontacts($emailstoadd)
-    {
-        //TODO:check form POST - request adding procedure
-        //TODO:display form
-
     }
 }

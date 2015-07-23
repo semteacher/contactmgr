@@ -37,6 +37,7 @@ class ContactsModel extends Model {
         $this->_lastName = $lastName;
         $this->_email = $email;
         $this->_phoneHome = $phoneHome;
+        //TODO: complete
     }
     
     public function setContactByArray($contactDeatils)
@@ -85,11 +86,11 @@ class ContactsModel extends Model {
             $check = false;
             array_push($errors, "E-mail is required!");
         }
-//        else if (!filter_var( $email, FILTER_VALIDATE_EMAIL ))
-//        {
-//            $check = false;
-//            array_push($errors, "Invalid E-mail!");
-//        }
+        else if (!filter_var( $this->_email, FILTER_VALIDATE_EMAIL ))
+        {
+            $check = false;
+            array_push($errors, "Invalid E-mail!");
+        }
 
         if (empty($this->_phoneHome)&&empty($this->_phoneWork)&&empty($this->_phoneCell))
         {
