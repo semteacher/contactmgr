@@ -29,8 +29,8 @@ SET time_zone = "+00:00";
 CREATE TABLE IF NOT EXISTS `contacts` (
   `id_contact` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `user_id` int(10) unsigned DEFAULT NULL COMMENT 'FK. Link to table "users" (if exist)',
-  `fname` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
-  `lname` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `fname` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `lname` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
   `email` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   `phone_h` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL,
   `phone_w` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL,

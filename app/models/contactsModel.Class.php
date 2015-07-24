@@ -37,6 +37,7 @@ class ContactsModel extends Model {
         $this->_lastName = $lastName;
         $this->_email = $email;
         $this->_phoneHome = $phoneHome;
+        //TODO: complete
     }
     
     public function setContactByArray($contactDeatils)
@@ -85,11 +86,11 @@ class ContactsModel extends Model {
             $check = false;
             array_push($errors, "E-mail is required!");
         }
-//        else if (!filter_var( $email, FILTER_VALIDATE_EMAIL ))
-//        {
-//            $check = false;
-//            array_push($errors, "Invalid E-mail!");
-//        }
+        else if (!filter_var( $this->_email, FILTER_VALIDATE_EMAIL ))
+        {
+            $check = false;
+            array_push($errors, "Invalid E-mail!");
+        }
 
         if (empty($this->_phoneHome)&&empty($this->_phoneWork)&&empty($this->_phoneCell))
         {
@@ -347,14 +348,32 @@ class ContactsModel extends Model {
         {
             return false;
         } else {
-
-            //$this->_firstName = $contactDetails['fname'];
-            //$this->_lastName = $contactDetails['lname'];
-            //$this->_email = $contactDetails['email'];
-            //$this->_idContact = $contactDetails['id_contact'];
-            $tmpcontact->setContactByArray($contact);
+            $tmpcontact=$this->setContactByArray($contactDetails);
             
-            return $this;
+            return $tmpcontact;
+        }
+
+    }
+
+    public function getContactByEmailAsArray($email)
+    {
+        //$id_contact = intval($id_contact);
+
+        $sql = "SELECT
+                    *
+                FROM
+                    contacts c
+                WHERE
+                    c.email = ?";
+
+        $this->_setSql($sql);
+        $contactDetails = $this->getRow(array($email));
+
+        if (empty($contactDetails))
+        {
+            return false;
+        } else {
+            return $contactDetails;
         }
 
     }

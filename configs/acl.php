@@ -10,7 +10,7 @@ define ('DEFAULT_SITE_ROLE', 'guest');
 $acl=[
     'admin'=>[
         'site'=>['index', 'login', 'logout', 'err403'],
-        'albums'=>['share', 'selectcontacts'],
+        'albums'=>['share', 'selectcontacts', 'sharereport'],
         'events'=>['share'],
         'contacts'=>['index', 'edit', 'save', 'del', 'select'],
         'users'=>['index', 'edit', 'save', 'del', 'add', 'changepassword']

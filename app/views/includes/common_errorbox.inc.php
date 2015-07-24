@@ -1,6 +1,6 @@
 <div class="errbox">
     <?php
-    if(isset($errors)){
+    if(!empty($errors)){
         echo 'Error(s): ';
         foreach ($errors as $error){echo '<span>'.$error.'</span>';
         }}
