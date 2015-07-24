@@ -1,16 +1,17 @@
 <?php
+
 /**
  * Created by PhpStorm.
  * User: SemenetsA
  * Date: 21.07.2015
  * Time: 14:31
  */
-
-class AlbumsModel extends Model {
+class AlbumsModel extends Model
+{
     private $_idAlbum;
     private $_albumTitle;
 
-    public function setContact($idAlbum=NULL, $albumTitle)
+    public function setContact($idAlbum = NULL, $albumTitle)
     {
         $this->_idAlbum = $idAlbum;
         $this->_albumTitle = $albumTitle;
@@ -42,11 +43,10 @@ class AlbumsModel extends Model {
         $albumDetails['albumtitle'] = 'My Demo Album';
         $albumDetails['albumId'] = 1;
 
-        $this->_albumTitle = $albumDetails['albumtitle'];
-        $this->_idAlbum = $albumDetails['albumId'] = 1;
+//        $this->_albumTitle = $albumDetails['albumtitle'];
+//        $this->_idAlbum = $albumDetails['albumId'] = 1;
 
-        if (empty($albumDetails))
-        {
+        if (empty($albumDetails)) {
             return false;
         } else {
             return $albumDetails;
@@ -55,23 +55,41 @@ class AlbumsModel extends Model {
 
     public function checkEmailsExist($emailsstr)
     {
-        try {
-            $emails = explode(",", $emailsstr);
-            $emailstoadd = array();
-            foreach ($emails as $email) {
-                //check if contact exist
-                $contact = new ContactsModel();
-                if (!$contact->getContactByEmailAsArray($email)) {
-                    array_push($emailstoadd, $email);
-                }
+        $emails = explode(", ", $emailsstr);
+        $emailstoadd = array();
+        foreach ($emails as $email) {
+            //check if contact exist
+            $contact = new ContactsModel();
+            if (!$contact->getContactByEmailAsArray($email)) {
+                array_push($emailstoadd, $email);
             }
-            if (isset($emailstoadd)){
-                return $emailstoadd;
-            } else {
-                return false;
-            }
-        } catch (Exception $e) {
-            return $e;
         }
+        if (isset($emailstoadd)) {
+            return $emailstoadd;
+        } else {
+            return false;
+        }
+    }
+
+    public function addEmailsToContacts($selctedemailstoadd)
+    {
+        $errcount = 0;
+
+        foreach ($selctedemailstoadd as $selctedemailtoadd) {
+            //check if contact exist
+            $contact = new ContactsModel();
+            $contact->setContactByArray(array('email'=>$selctedemailtoadd));
+            $curremailres = $contact->addContact();
+            if (!$curremailres) {
+                $errcount = $errcount+1;
+            }
+        }
+
+        if ($errcount >0) {
+            return $errcount;
+        } else {
+            return true;
+        }
+
     }
 }
